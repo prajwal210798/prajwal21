@@ -1,0 +1,218 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 1
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+DIFFERENT METHODS OF MAPPING 
+\end_layout
+
+\begin_layout Abstract
+In this blog I am going to show the different methods of baseyian localization
+ methods which means giving the poses of robot ie given the sensors value
+ of robot estimate the position of robot in map.
+\end_layout
+
+\begin_layout Part*
+The general Problem of mapping
+\end_layout
+
+\begin_layout Standard
+Formally ,mapping involves the given sensor data
+\end_layout
+
+\begin_layout Standard
+d=
+\begin_inset Formula $\left\{ u_{1},z_{1},u_{2},z_{2},........u_{t},z_{t}\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+to calculate the most like map or position
+\end_layout
+
+\begin_layout Standard
+m*=argmax
+\begin_inset Formula $_{m}P\left(\frac{m}{d}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Grid maps
+\end_layout
+
+\begin_layout Enumerate
+We discretize the world into cells.
+\end_layout
+
+\begin_layout Enumerate
+Each cell is assumed to be occupied or free
+\end_layout
+
+\begin_layout Enumerate
+It requires substantial memory resources
+\end_layout
+
+\begin_layout Enumerate
+It does not relay on a feature detector.
+\end_layout
+
+\begin_layout Enumerate
+Each cell is a binary random variable that models the occupancy.
+ p
+\begin_inset Formula $\left(m_{j}\right)\rightarrow1$
+\end_inset
+
+ = occupied p
+\begin_inset Formula $\left(m_{j}\right)$
+\end_inset
+
+
+\begin_inset Formula $\rightarrow0$
+\end_inset
+
+ means not occupied.NO information p
+\begin_inset Formula $\left(m_{j}\right)$
+\end_inset
+
+
+\begin_inset Formula $\rightarrow0.5$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The cells (the random variables) are 
+\emph on
+independent of each other.
+
+\emph default
+ which means that occupuancy of one cell does not tell about anything the
+ occupancy of the neighbouring cell.
+\end_layout
+
+\begin_layout Enumerate
+The probability distribution of the map is given by the product of probability
+ distribiutions of the individual cells.
+ p
+\begin_inset Formula $\left(m|z_{1:t},x_{1:t}\right)$
+\end_inset
+
+=
+\begin_inset Formula $\prod_{i}$
+\end_inset
+
+p
+\begin_inset Formula $\left(m_{i}|z_{1:t},x_{1:t}\right)$
+\end_inset
+
+ where i represents the number of cells.
+\end_layout
+
+\begin_layout Enumerate
+The map is static.States are not changed
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Longrightarrow$
+\end_inset
+
+ BINARY BAYES FILTER (for a static state)
+\end_layout
+
+\begin_layout Title
+STATIC STATE BINARY BAYES FILTER
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+p
+\begin_inset Formula $\left(m_{i}|z_{1:t},x_{1:t}\right)$
+\end_inset
+
+ 
+\begin_inset Formula $\Longrightarrow$
+\end_inset
+
+ 
+\begin_inset Formula $\frac{p\left(z_{t|m_{i},z_{1:t-1,x_{1:t}}}\right)p(m_{i}|z_{1:t-1},x_{1:t}}{}$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hum@n_G@ze</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/CLOUSRE_REPORT.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="logo">
+                            <h2><a href="https://www.drdo.gov.in/labs-and-establishments/centre-artificial-intelligence-robotics-cair">CAIR LAB</a></h2>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="menu">
+                            <ul>
+                                <li class="active"><a href="/home/prajwal-thakur/website_design/main_web/web/index.html">Home</a></li>
+                                <!--<li><a href="#">lifestyle</a></li>
+                                <li><a href="#">Food</a></li>
+                                <li><a href="#">Nature</a></li>
+                                <li><a href="#">photography</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="bg-text-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="bg-text">
+                            <h3>PERCEPTION INFORMED BY
+                                NAVIGATION FOR SEARCH AND
+                                RESCUE</h3>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <br>
+        <div class="container">
+        <p align="center" style="margin-bottom: 0cm; line-height: 115%"><font face="Times New Roman, serif"><font size="4" style="font-size: 14pt"><span lang="en-US"><u><b>
+            Discussion on similar and relevant algorithms</b></u></span></font></font></p>
+            <p lang="en-US" align="justify" style="margin-bottom: 0cm; line-height: 115%">
+            <br>
+            
+            </p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 115%"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>Introduction:	</b></span></font></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 115%"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Most
+            of the conventional detection and tracking algorithms/systems for
+            moving objects includes preprocessing, background subtraction (which
+            includes dynamic background modeling), detection foreground object(s)
+            (especially the moving objects), post-processing, and tracking (with
+            foreground boundary/mask) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[1]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
+            The tracking process is achieved by using a combination of spatial
+            and temporal information about the moving object. The underlying
+            algorithm decides about the movement of an object based on the
+            spatial and temporal coherency. However, the process of background
+            modeling is quite challenging due to the factors like dynamic
+            background, variation in illuminations, change in the scene,
+            mis-classification of shadow as an object, camouflage and
+            bootstrapping problems </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[2,3]
+            </span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">etc.
+            Moreover, background subtraction is quite useful for a video from a
+            static camera but, delays the operation of object tracking in a video
+            of dynamic background. Therefore, recent trends avoid the
+            background-subtraction step and use machine learning approaches for
+            detection, classification and tracking of moving objects. </span></font></font>
+            </p>
+            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
+            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">An
+            input image is most often pre-processed for normalizing contrast and
+            brightness effects </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[4]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
+            A very common preprocessing step is to subtract the mean of image
+            intensities and divide by the standard deviation. Sometimes, gamma
+            correction produces slightly better results. On the other hand, a
+            color space transformation (e.g. RGB to LAB color space) may help to
+            get better results while dealing with color images. Finally, as part
+            of pre-processing, an input image or patch of an image is also
+            cropped and resized to a fixed size. This is essential for the next
+            step, i.e. feature extraction, which requires a fixed sized image for
+            its operation. However, one may remember that it is hard to predict a
+            particular pre-processing algorithm that best suits a typical
+            application. Fortunately, the good thing is that the choice of the
+            pre-processing algorithm affects minimally in the results, and slight
+            betterment in the result can only be obtained with a heuristic choice
+            of the algorithm. </span></font></font>
+            </p>
+            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
+            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">The
+            preprocessing step is followed by the Feature Extraction. Actually,
+            the input image contains much extra information that is not necessary
+            for classification. Therefore, prior to image classification, the
+            target image is simplified by extracting the important information
+            contained in the image and leaving out the rest. For example, if one
+            wants to find the shirt and coat buttons in images, he/she will
+            notice a significant variation in RGB pixel values. However, the
+            image can be simplified by running an edge detector on the image. It
+            is still easily possible to discern the circular shape of the buttons
+            in these edge images. Therefore, it can be concluded that edge
+            detection retains the essential information while throwing away
+            non-essential information. However, designing these features is
+            crucial to the performance of the algorithm in a traditional computer
+            vision approaches. Actually, a much better performance can be
+            achieved finding much more reliable features than the simple edge
+            detection. In the example of shirt and coat buttons, a good feature
+            detector will not only capture the circular shape of the buttons but
+            also gather information about how buttons are different from other
+            circular objects like car tires. Some well-known features used in
+            computer vision are Haar-like features (introduced by Viola and
+            Jones) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[5]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
+            Histogram of Oriented Gradients (HOG) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[6,7]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
+            Scale-Invariant Feature Transform (SIFT) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[8,9]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
+            Speeded Up Robust Feature (SURF) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[10]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">
+            etc.</span></font></font></p>
+            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
+            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Now,
+            after converting an image to a corresponding feature vector,
+            classification algorithm takes this feature vector as input and
+            outputs a class label. However, these classification algorithms are
+            required to be trained before it can actually determine the classes
+            of the objects. The algorithms need to be trained by showing
+            thousands of examples of images from different target and known
+            classes. Different learning algorithms learn differently, but the
+            general principle is that the learning algorithms treat feature
+            vectors as points in higher dimensional space, and try to find planes
+            / surfaces that partition the higher dimensional space in such a way
+            that all examples belonging to the same class are on one side of the
+            plane / surface. </span></font></font>
+            </p>
+            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
+            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">The
+            classification algorithms/classifiers are majorly clustered in -
+            Linear classifier, Quadratic classifier, Bayesian classifier, Neural
+            Network, Kernel estimation and k-nearest neighbor, Decision Trees,
+            Support Vector Machines, Maximum Entropy Classifier etc. Among these
+            algorithms, the mostly cultured classifier is the Neural Network
+            based classifier.</span></font></font></p>
+            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
+            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Now,
+            an object detection and classification system takes a classifier for
+            an object of interest and evaluates it at various locations and
+            scales in a test image. Different systems use a sliding window
+            approach where the classifier is run at evenly spaced locations over
+            the entire image. On the other hand, the popular R-CNN use region
+            proposal methods to, first, generate potential bounding boxes in an
+            image and then run a classifier on these proposed boxes </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[11]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
+            After classification, post-processing is used to refine the bounding
+            box, eliminate duplicate detections, and rescore the box based on
+            other objects in the scene. However, these complex pipelines are slow
+            and hard to optimize because each individual component must be
+            trained separately. To resolve this limitation, some new algorithms
+            like YOLO </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[11]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">
+            has been proposed which trains the classifier to find multiple
+            objects in a single frame in one go. The algorithm has proved its
+            potentiality in terms of speed and accuracy.</span></font></font></p>
+            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
+            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>Nevertheless,
+            in spite of these long sustained researches in this field, there
+            still exists a significant probability of false-detection and
+            missed-detection when the object is detected in a single frame. This
+            is because; the current autonomous unmanned aerial platforms simply
+            implement a passive object detection running on the live camera
+            images </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[12]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
+            On the other hand, Humans lingers its gaze in an object until it is
+            detected properly </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[13]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
+            The gaze tries to obtain a temporal continuity between the
+            consecutive frames while the object is in motion. Otherwise, the
+            continuity is obtained by moving our gaze around the object to
+            collect more features about it. This work gathers inspiration from
+            the above mentioned behavior which occurs naturally across humans,
+            birds and most animals. Some strategies have also been proposed in
+            the same direction </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[14]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
+            but they yet required to be improved further for real-time
+            implementation. Temporal verification of object in continuous videos
+            is required to improve the accuracy or confidence of detection.
+            Temporal consistency dictionary learning may also be incorporated
+            further in improvement of the tracking algorithm </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[15]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
+            Multiple frame may be captured by the platform by maneuvering it in a
+            straight line forward motion (dolly), or sideways motion (truck), or
+            up-down motion (pedestal); and their correlation may be utilized to
+            enhance the confidence, and hence to improve the accuracy in
+            detection </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[16-19]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">
+            as well as tracking </b></span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[20,21]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
+             </span></font></font>
+            </p>
+            <p align="justify" style="margin-bottom: 0.21cm; line-height: 115%"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>References:</b></span></font></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[1]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	Bahadir
+            Karasulu and Serdar Korukoglu,.: Springer, 2013, ch. 2, pp. 7-30.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[2]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	B.
+            Ahn, "Real-time video object recognition using convolutional
+            neural network," , 2015, pp. 1-7.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[3]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	J.
+            S. Kulchandani and K. J. Dangarwala, "Moving object detection:
+            Review of recent research trends," , 2015, pp. 1-5.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[4]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	SATYA
+            MALLICK. (2016, November) http://www.learnopencv.com. [Online].
+            http://www.learnopencv.com/image-recognition-and-object-detection-part1/</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[5]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	P.
+            Viola and M. Jones, "Rapid object detection using a boosted
+            cascade of simple features," , vol. 1, 2001, pp. I-511-I-518
+            vol.1.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[6]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	N.
+            Dalal and B. Triggs, "Histograms of oriented gradients for human
+            detection," , vol. 1, 2005, pp. 886-893 vol. 1.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[7]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	R.K.
+            McConnell, Method of and apparatus for pattern recognition, 1986, US
+            Patent 4,567,610.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[8]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	D.
+            G. Lowe, "Object recognition from local scale-invariant
+            features," , vol. 2, 1999, pp. 1150-1157 vol.2.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[9]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	D.G.
+            Lowe, Method and apparatus for identifying scale invariant features
+            in an image and use of same for locating an object in an image, 2004,
+            US Patent 6,711,293.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[10]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	Herbert
+            Bay, Andreas Ess, Tinne Tuytelaars, and Luc Van Gool, "Speeded-Up
+            Robust Features (SURF)," Computer Vision and Image
+            Understanding, vol. 110, pp. 346-359, 2008, Similarity Matching in
+            Computer Vision and Multimedia.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[11]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	Joseph
+            Redmon, Santosh Kumar Divvala, Ross B. Girshick, and Ali Farhadi,
+            "You Only Look Once: Unified, Real-Time Object Detection,"
+            CoRR, vol. abs/1506.02640, 2015.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[12]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	Z.
+            He et al., "Ard-μ-Copter: A Simple Open Source Quadcopter
+            Platform," , 2015, pp. 158-164.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0">
+            <font face="Times New Roman, serif"><span lang="en-US">[13]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	Kiwon
+            Yun, Yifan Peng, Dimitris Samaras, Gregory Zelinsky, and Tamara Berg,
+            "Exploring the role of gaze behavior and object detection in
+            scene understanding," Frontiers in Psychology, vol. 4, p. 917,
+            2013.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[14]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	B.V.K.V.
+            Kumar, A. Mahalanobis, and R.D. Juday, Correlation Pattern
+            Recognition.: Cambridge University Press, 2010.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[15]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	X.
+            Cheng, Y. Zhang, J. Cui, and L. Zhou, "Object Tracking via
+            Temporal Consistency Dictionary Learning," IEEE Transactions on
+            Systems, Man, and Cybernetics: Systems, vol. 47, pp. 628-638, 2017.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[16]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	R.
+            Kerekes and B. V. K., "Enhanced Video-Based Target Detection
+            using Multi-Frame Correlation Filtering," IEEE Transactions on
+            Aerospace and Electronic Systems, vol. 45, pp. 289-307, 2009.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[17]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	R.
+            Feris, A. Datta, S. Pankanti, and M. T. Sun, "Boosting object
+            detection performance in crowded surveillance videos," 2013, pp.
+            427-432.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[18]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	Michael
+            Horton, Mike Cameron-Jones, and Raymond Williams, "Multiple
+            Classifier Object Detection with Confidence Measures," in AI
+            2007: Advances in Artificial Intelligence: 20th Australian Joint
+            Conference on Artificial Intelligence, Gold Coast, Australia,
+            December 2-6, 2007. Proceedings, Mehmet A. Orgun and John Thornton,
+            Eds.: Springer Berlin Heidelberg, 2007, pp. 559-568.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[19]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	E.
+            N. Mortensen and W. A. Barrett, "A confidence measure for
+            boundary detection and object selection," vol. 1, 2001, pp.
+            I-477-I-484 vol.1.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[20]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	L.
+            Dong, I. Zoghlami, and S. C. Schwartz, "Object Tracking in
+            Compressed Video with Confidence Measures," 2006, pp. 753-756.</span></font></p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><font color="#0070c0"><font face="Times New Roman, serif"><span lang="en-US">[21]</span></font></font><font face="Times New Roman, serif"><span lang="en-US">	B.
+            Zhang et al., "Adaptive Local Movement Modeling for Robust
+            Object Tracking," IEEE Transactions on Circuits and Systems for
+            Video Technology, vol. 27, pp. 1515-1526, 2017.</span></font></p>
+            <p lang="en-US" align="justify" style="margin-bottom: 0cm; line-height: 100%">
+            <br>
+            
+            </p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br>
+            
+            </p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br>
+            
+            </p>
+            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br>
+            
+            </p>
+        
+        </div>
+        
+
+        <div class="container">
+            <p class="noindent" >In this work, object detection has been implemented using the well-known
+                You-Only-Look-Once (YOLO) algorithm. Like most other deep-neural-network based
+                detection algorithms, the YOLO algorithm detects objects in an image frame. This
+                excludes the possibility to relate the temporal information of an object with its
+                detection confidence. On the other hand, a conventional tracking algorithm cannot
+                detect an object, but is able to relate the present position of an arbitrary object with
+                its previous position. Therefore; fusion of YOLO with a tracking algorithm, e.g.
+                Kalman Filter based tracking, is made in this work to improve the detection
+                confidence of an object.
+                <!--l. 286--><p class="indent" >   Most of the existing object detection and tracking algorithms that are present
+                today for ready to use does not associate the temporal information of the object with
+                its detection congidence. In this work, the temporal imformation of the object has
+                been associated to improve the confidence of the object. In other words, machine
+                ability to identify an object has been enhanced through countinous gazing to the
+                object and thus building up the confidence to indentify the object particularly in low
+                light condition .
+                <!--l. 295--><p class="indent" >   The formula that is proposed here uses the confidences of an detected object and
+                assign it to a tracker for the object. Then the confidences of the successive
+                detections have been associated with the tracker confidence through the propose 
+                formula.
+                <br>
+                <br>
+                <b>The formula will be made public after publication of confrence paper</b>
+                <br>
+                <br>
+                </p>
+                <!--l. 320--><p class="indent" >   Experiments that are carried on the various lighting conditions have shown the
+                expected results.
+                <!--l. 323--><p class="indent" >   To illustrate the result let&#8217;s take the graph of an object&#8217;s tracker and detected
+                confidence
+                <!--l. 326--><p class="indent" >   <img 
+                src="img/Selection_003.png" alt="PIC"  
+                >
+                <!--l. 328--><p class="indent" >   The improved confidence /build up confidence of object is equivalent to the
+                confidence of the tracker .
+                <!--l. 331--><p class="indent" >   From frame 0 to 10 the confidence of tracker is falling as the number
+                of losses is increasing this is analogous to the situation where human first
+                think that a object is &#8220;X&#8221; with confidence of almost 0.5 then next moment
+                is he/she think that object is another object &#8220;Y&#8221; due to the unabilty to
+                
+                track the object movement in low lighting condition or because of other
+                reason.
+                <!--l. 338--><p class="indent" >   From frame 10 to 25 tracker confidence starts rising as hits is increasing this is
+                analogus to the situation where a human starts to identify an object to be &#8220;X&#8221;
+                continuously but with low confidence may be due to lighting condition or due to any
+                other factors and after continuous gazing he is able to identify the object with almost
+                100% of confidence.
+                
+
+                <!--l. 407--><p class="noindent" >
+                     <dl class="list1"><dt class="list">
+                     </dt><dd 
+                class="list">
+                     <!--l. 407--><p class="noindent" ><span 
+                class="ectt-1000">Task</span><span 
+                class="ectt-1000">&#x00A0;has</span><span 
+                class="ectt-1000">&#x00A0;been</span><span 
+                class="ectt-1000">&#x00A0;successfully</span><span 
+                class="ectt-1000">&#x00A0;completed</span><span 
+                class="ectt-1000">&#x00A0;by</span><span 
+                class="ectt-1000">&#x00A0;implementing</span><span 
+                class="ectt-1000">&#x00A0;the</span><span 
+                class="ectt-1000">&#x00A0;</span>
+                     <!--l. 410--><p class="noindent" ><span 
+                class="ectt-1000">proposed</span><span 
+                class="ectt-1000">&#x00A0;formula</span><span 
+                class="ectt-1000">&#x00A0;in</span><span 
+                class="ectt-1000">&#x00A0;different</span><span 
+                class="ectt-1000">&#x00A0;situations</span><span 
+                class="ectt-1000">&#x00A0;and</span><span 
+                class="ectt-1000">&#x00A0;getting</span><span 
+                class="ectt-1000">&#x00A0;the</span><span 
+                class="ectt-1000">&#x00A0;desired</span><span 
+                class="ectt-1000">&#x00A0;result.</span></dd></dl>
+                
+
+                <!--l. 446--><p class="indent" >   <span 
+                class="tcrm-1000">&#8226; </span>software prerequisites
+                     <div class="quote">
+                     <!--l. 448--><p class="noindent" ><span 
+                class="tcrm-1000">&#8226; </span>Python 3
+                     <!--l. 450--><p class="noindent" ><span 
+                class="tcrm-1000">&#8226; </span>Open CV
+                
+                     <!--l. 452--><p class="noindent" >For GPU compatibility
+                     <!--l. 454--><p class="noindent" ><span 
+                class="tcrm-1000">&#8226; </span>CUDA and CUDNN
+                     <!--l. 456--><p class="noindent" ><span 
+                class="tcrm-1000">&#8226; </span>darknet</div>
+                <!--l. 459--><p class="noindent" >
+                   <h4 class="likesubsectionHead"><a 
+                 id="x1-7000"></a>SCOPE OF FUTURE WORK</h4>
+                     <ul class="itemize1">
+                     <li class="itemize">The choice of detection and tracking algorithim</li></ul>
+                <!--l. 463--><p class="noindent" >A better tracking algorithim can be adopted to improve accuracy of the proposed
+                algorithm. However, this is subjected to the trade-off of time complexity/frame rate
+                of the algorithm.
+                <!--l. 467--><p class="indent" >   A better detection algorithim can be used to detect to the object in low lightling
+                condition.
+                <!--l. 470--><p class="indent" >   An exhausive trining of the detection algorithm is required for currectly detecting
+                objects in an aerial image.
+                <!--l. 473--><p class="noindent" >
+                   <h4 class="likesubsectionHead"><a 
+                 id="x1-8000"></a></h4>            
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <section class="blog-post-area">
+            <div class="container">
+
+                <div class="row2">
+                    <div class="column2">
+                      <h2>Project In Charge Professor </h2>
+                      <p><li><a href="#">Dr Mrinal Sen</a></li>
+                        </p>
+                        <h2>Team member</h2>
+                        
+                        <p><li><a href="#">Pr@jwal Th@kur</a></li>
+                          </p>
+                    </div>
+                    <div class="column2">
+                      <h2>My Contribution</h2>
+                      <p>
+                        <li>Helping in Developent of Algorithm with Dr Mrinal Sen </li>
+                        <li>studied Kalman filter, Deep sort based tracking Algorithms and modified them as per our needs  </li>
+                        <li>Modified the Script to as per the requirements of DRDO and run it on NVIDIA-JETSON-TX2 for further research in real time computation by drones </li>
+                      </p>
+                    </div>
+                </div> 
+    
+                <div class="row2">
+                    <div class="column2">
+                      <h2>Work Progress</h2>
+                      <p>Final demonstration  has been given to DRDO, preparing confrence paper
+                        <h4><span class="date">3 January 2020</span></h4></p>
+                    </div>
+                   <!-- <div class="column2">
+                      <h2>Components_required</h2>
+                      <p>
+                        <li>BEAGLE-3P-BBONE-AI:BeagleBone AI AM5729 , Microprocessor-AM57X SITARA</li>
+                        <li>QUANTUM USB Sound Card, LOGITECH 5 MEXAPIXEL WEB CAMERA</li>
+                      </p>
+                    </div>-->
+                </div>
+                
+            </div>
+            
+           <!-- <div class="pegination">
+                
+                <ul>
+                    <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                </ul>
+
+
+                <div class="nav-links">
+                    <span class="page-numbers current">1</span>
+                    <a class="page-numbers" href="#">2</a>
+                    <a class="page-numbers" href="#">3</a>
+                    <a class="page-numbers" href="#">4</a>
+                    <a class="page-numbers" href="#">5</a>
+                    <a class="page-numbers" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </section> -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-bg">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="footer-menu">
+                                        <!--<ul>
+                                            <li class="active"><a href="#">Home</a></li>
+                                            <li><a href="#">lifestyle</a></li>
+                                            <li><a href="#">Food</a></li>
+                                            <li><a href="#">Nature</a></li>
+                                            <li><a href="#">photography</a></li>
+                                        </ul>-->
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="footer-icon">
+                                        <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></p>
+                                    </div>
+                                </div>
+                            </div> .
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div> 
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/active.js"></script>
+</body>
+
+</html>

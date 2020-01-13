@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Optimization</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="newfile4.tex"> 
+<link rel="stylesheet" type="text/css" href="newfile4.css"> 
+</head><body 
+>
+   <div class="maketitle">
+
+
+
+<h2 class="titleHead">Optimization</h2>
+<div class="author" ></div><br />
+<div class="date" ><span 
+class="ecrm-1200">26th December 2019</span></div>
+   </div><div 
+class="abstract" 
+>
+<div class="center" 
+>
+<!--l. 16--><p class="noindent" >
+<!--l. 16--><p class="noindent" ><span 
+class="ecbx-0900">Abstract</span></div>
+     <!--l. 17--><p class="indent" >    <span 
+class="ecrm-0900">We can reach to a stable point from a unstable point given the system</span>
+     <span 
+class="ecrm-0900">is controllable ,</span>
+     <!--l. 20--><p class="indent" >    <span 
+class="ecrm-0900">but the thing is that we have never tought about the constrained in</span>
+     <span 
+class="ecrm-0900">inout u.</span>
+     <!--l. 23--><p class="indent" >    <span 
+class="ecrm-0900">we have never said the power given to the actuators should be in some</span>
+     <span 
+class="ecrm-0900">limit .</span>
+     <!--l. 26--><p class="indent" >    <span 
+class="ecrm-0900">while experimenting I have found the cases where I have got values of</span>
+     <span 
+class="ecrm-0900">gain matrix upto 100 or 200.In this section I have explored the world of</span>
+     <span 
+class="ecrm-0900">optimization , that is for example go to a point &#8220;A&#8221;  from point &#8220;B&#8221;  by</span>
+     <span 
+class="ecrm-0900">consuming least fuel!.</span>
+</div> *This blog is closely related with Underactuated Robotics by MIT
+   <h3 class="likesectionHead"><a 
+ id="x1-1000"></a>WHAT IS A GOOD CONTROL LAW?</h3>
+     <ul class="itemize1">
+     <li class="itemize">minimise cost or
+     </li>
+     <li class="itemize">maximise the performance index while
+     </li>
+     <li class="itemize">the plant states satisfy some physical constraints</li></ul>
+
+<!--l. 40--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>What do we need to solve such problems</h4>
+     <ul class="itemize1">
+     <li class="itemize">Plant dynamics
+     </li>
+     <li class="itemize">a given performance index or cost
+     </li>
+     <li class="itemize">Boundary conditions
+     </li>
+     <li class="itemize">The physical constraints</li></ul>
+<!--l. 48--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-3000"></a>HOW I WILL PROCEED</h3>
+<!--l. 50--><p class="noindent" >In this part I will try to give simple example about different controllers on simpler
+different physical system and then at last will try to implement those ideas on our
+classical inverted pendulum model.
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3002x1">&#8220;BANG-BANG CONTROLLER&#8221;
+     </li>
+     <li 
+  class="enumerate" id="x1-3004x2">&#8220;LQR CONTROLLER&#8221;</li></ol>
+<!--l. 59--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Bang-Bang Controller!</h3>
+<!--l. 61--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-5000"></a>Linear Quardratic Controller</h3>
+<!--l. 64--><p class="noindent" ><span 
+class="ecti-1000">We control a linear system having some constraint which is described by a quardratic</span>
+<span 
+class="ecti-1000">cost.</span>
+<!--l. 69--><p class="indent" >   <span 
+class="ecti-1000">Our goal will be to reach a sable state from a unstable state through those other</span>
+<span 
+class="ecti-1000">states which give minimum cost .This quardatic cost takes into two types of account</span>
+<span 
+class="ecti-1000">the cost of being in that state and the cost of &#8220;giving the controller a Input</span>
+<span 
+class="ecti-1000">command&#8221;.</span>
+<!--l. 71--><p class="indent" >   Consider now the optimal control problem: <span 
+class="cmmi-10">min</span><sub><span 
+class="cmmi-7">u</span><span 
+class="cmr-7">(</span><span 
+class="cmmi-7">.</span><span 
+class="cmr-7">)</span></sub> <span 
+class="esint-10">&#x222B;</span>
+    <sub><span 
+class="cmr-7">0</span></sub><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">g</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><span 
+class="cmr-10">)</span><span 
+class="cmmi-10">dt</span>
+<!--l. 73--><p class="indent" >   where g(x,u) is one step cost from state x to x<sub><span 
+class="cmmi-7">n</span><span 
+class="cmr-7">+1</span></sub> having an input u
+
+<!--l. 76--><p class="indent" >   subject to the constraint <img 
+src="newfile40x.png" alt="dx-
+dt"  class="frac" align="middle"> = f(x,u), x <span 
+class="cmsy-10">&#x2208; </span>R<sup><span 
+class="cmmi-7">n</span></sup> ,u <span 
+class="cmsy-10">&#x2208; </span>R<sup><span 
+class="cmmi-7">m</span></sup>. Abstractly, this is a
+constrained optimization problem where we seek a feasible trajectory (x(t),u(t)) that
+minimizes the cost function <span 
+class="cmmi-10">J</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><span 
+class="cmr-10">) =</span> <span 
+class="esint-10">&#x222B;</span>
+  <sub><span 
+class="cmr-7">0</span></sub><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">g</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><span 
+class="cmr-10">)</span><span 
+class="cmmi-10">dt</span>
+<!--l. 81--><p class="indent" >   <span 
+class="ecti-1000">INFINITE HORIZON OPTIMAL CONTROL:</span>
+<!--l. 83--><p class="indent" >   If we let T=infinite then we seek to optimize a cost function over all time.This is
+called infinite horizon optimal control problem.
+<!--l. 86--><p class="indent" >   If infinite horizon problem has a solution with finite cost then the integral cost
+term <span 
+class="cmmi-10">L</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><span 
+class="cmr-10">)</span>must approach to zero as t<span 
+class="cmsy-10">&#x2192; </span><span 
+class="cmmi-10">infinite</span>.
+<!--l. 89--><p class="indent" >   We choose the cost function as <span 
+class="cmmi-10">x</span><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">Qx </span><span 
+class="cmr-10">+ </span><span 
+class="cmmi-10">u</span><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">Ru</span>
+<!--l. 91--><p class="indent" >   In this formulation, Q <span 
+class="cmsy-10">&#x2265; </span>0 penalizes state error, R &#x003E; 0 penalizes the input control
+signals.
+<!--l. 94--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-6000"></a>The necessary and sufficient condition</h4>
+<!--l. 96--><p class="noindent" >The necessary and sufficient condition for optimality is to satisfy
+<span 
+class="ecbx-1000">Hamilton-Jacobi-Bellman </span>equation.
+<!--l. 99--><p class="indent" >   <span 
+class="ecbx-1000">Hamilton-Jacobi-Bellman equation:</span>
+<!--l. 101--><p class="indent" >   0=<span 
+class="cmmi-10">min</span><sub><span 
+class="cmmi-7">u</span></sub><span 
+class="cmr-10">[</span><span 
+class="cmmi-10">g</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><span 
+class="cmr-10">) +</span> <img 
+src="newfile41x.png" alt="dJ*-
+dx"  class="frac" align="middle"><span 
+class="cmmi-10">f</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><span 
+class="cmr-10">)]</span>
+<!--l. 103--><p class="indent" >   which says that if you have a control policy u and optimal cost to go function(
+sum of one step cost )to prove that it is a optimal control policy then it should
+statisfy the following equation:
+<!--l. 107--><p class="indent" >   0=<span 
+class="cmr-10">[</span><span 
+class="cmmi-10">g</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><sup><span 
+class="cmsy-7">*</span></sup><span 
+class="cmr-10">) +</span> <img 
+src="newfile42x.png" alt="dJ*
+dx"  class="frac" align="middle"><span 
+class="cmmi-10">f</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">x,u</span><span 
+class="cmsy-10">*</span><span 
+class="cmr-10">)]</span>
+<!--l. 109--><p class="indent" >   The optimal policy we find from HJB equation
+<!--l. 111--><p class="indent" >   <span 
+class="cmmi-10">u</span><sup><span 
+class="cmsy-7">*</span></sup> <span 
+class="cmr-10">= </span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">R</span><sup><span 
+class="cmsy-7">-</span><span 
+class="cmr-7">1</span></sup><span 
+class="cmmi-10">B</span><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">Sx </span>=-k*x
+<!--l. 113--><p class="indent" >   S is the solution of algebric Riccati equation
+<!--l. 115--><p class="indent" >   <span 
+class="cmr-10">0 = </span><span 
+class="cmmi-10">SA </span><span 
+class="cmr-10">+ </span><span 
+class="cmmi-10">A</span><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">S </span><span 
+class="cmsy-10">- </span><span 
+class="cmmi-10">SBR</span><sup><span 
+class="cmsy-7">-</span><span 
+class="cmr-7">1</span></sup><span 
+class="cmmi-10">B</span><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">S </span><span 
+class="cmr-10">+ </span><span 
+class="cmmi-10">Q</span>
+<!--l. 117--><p class="indent" >   &#x003E;In matlab we have a direct command
+<!--l. 119--><p class="indent" >   K=LQR(A,B,Q,R) to find the gain matrix.  
+</body></html> 
+
+
+

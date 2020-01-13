@@ -1,0 +1,407 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\emph on
+Optimization
+\end_layout
+
+\begin_layout Date
+26th December 2019
+\end_layout
+
+\begin_layout Abstract
+We can reach to a stable point from a unstable point given the system is
+ controllable ,
+\end_layout
+
+\begin_layout Abstract
+but the thing is that we have never tought about the constrained in inout
+ u.
+\end_layout
+
+\begin_layout Abstract
+we have never said the power given to the actuators should be in some limit
+ .
+\end_layout
+
+\begin_layout Abstract
+while experimenting I have found the cases where I have got values of gain
+ matrix upto 100 or 200.In this section I have explored the world of optimization
+ , that is for example go to a point 
+\begin_inset Quotes eld
+\end_inset
+
+A
+\begin_inset Quotes erd
+\end_inset
+
+ from point 
+\begin_inset Quotes eld
+\end_inset
+
+B
+\begin_inset Quotes erd
+\end_inset
+
+ by consuming least fuel!.
+\end_layout
+
+\begin_layout Standard
+*This work is closely related with Underactuated Robotics by MIT
+\end_layout
+
+\begin_layout Section*
+WHAT IS A GOOD CONTROL LAW?
+\end_layout
+
+\begin_layout Itemize
+minimise cost or
+\end_layout
+
+\begin_layout Itemize
+maximise the performance index while
+\end_layout
+
+\begin_layout Itemize
+the plant states satisfy some physical constraints
+\end_layout
+
+\begin_layout Subsection*
+What do we need to solve such problems
+\end_layout
+
+\begin_layout Itemize
+Plant dynamics
+\end_layout
+
+\begin_layout Itemize
+a given performance index or cost
+\end_layout
+
+\begin_layout Itemize
+Boundary conditions 
+\end_layout
+
+\begin_layout Itemize
+The physical constraints
+\end_layout
+
+\begin_layout Section*
+HOW I WILL PROCEED
+\end_layout
+
+\begin_layout Standard
+In this part I will try to give simple example about different controllers
+ on simpler different physical system and then at last will try to implement
+ those ideas on our classical inverted pendulum model.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+BANG-BANG CONTROLLER
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Quotes eld
+\end_inset
+
+LQR CONTROLLER
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Bang-Bang Controller!
+\end_layout
+
+\begin_layout Section*
+Linear Quardratic Controller
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+We control a linear system having some constraint which is described by
+ a quardratic cost.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Our goal will be to reach a sable state from a unstable state through those
+ other states which give minimum cost .This quardatic cost takes into two
+ types of account the cost of being in that state and the cost of 
+\begin_inset Quotes eld
+\end_inset
+
+giving the controller a Input command
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Consider now the optimal control problem: 
+\begin_inset Formula $min_{u(.)}\int_{0}^{T}g(x,u)dt$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+g(x,u) is one step cost from state x to x
+\begin_inset Formula $_{n+1}$
+\end_inset
+
+ having an input u
+\end_layout
+
+\begin_layout Standard
+subject to the constraint 
+\begin_inset Formula $\frac{dx}{dt}$
+\end_inset
+
+ = f(x,u), x ∈ R
+\begin_inset Formula $^{n}$
+\end_inset
+
+ ,u ∈ R
+\begin_inset Formula $^{m}$
+\end_inset
+
+.
+ Abstractly, this is a constrained optimization problem where we seek a
+ feasible trajectory (x(t),u(t)) that minimizes the cost function 
+\begin_inset Formula $J(x,u)=\int_{0}^{T}g(x,u)dt$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+INFINITE HORIZON OPTIMAL CONTROL:
+\end_layout
+
+\begin_layout Standard
+If we let T=infinite then we seek to optimize a cost function over all time.This
+ is called infinite horizon optimal control problem.
+\end_layout
+
+\begin_layout Standard
+If infinite horizon problem has a solution with finite cost then the integral
+ cost term 
+\begin_inset Formula $L(x,u)$
+\end_inset
+
+must approach to zero as t
+\begin_inset Formula $\rightarrow infinite$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We choose the cost function as 
+\begin_inset Formula $x^{T}Qx+u^{T}Ru$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this formulation, Q ≥ 0 penalizes state error, R > 0 penalizes the input
+ control signals.
+\end_layout
+
+\begin_layout Standard
+!!if you assign Q=0 ;ie you dont care where your robot is and you only care
+ about penalizing the the input your controller would say ; nah! I wont
+ do anything to make u=0 and cost =0.
+\end_layout
+
+\begin_layout Standard
+if you make R=0 it means that you are allowing that your system to have
+ infinite control, which we certainly dont want! 
+\end_layout
+
+\begin_layout Subsection*
+The necessary and sufficient condition
+\end_layout
+
+\begin_layout Standard
+The necessary and sufficient condition for optimality is to satisfy 
+\series bold
+Hamilton-Jacobi-Bellman
+\series default
+ equation.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Hamilton-Jacobi-Bellman equation:
+\end_layout
+
+\begin_layout Standard
+0=
+\begin_inset Formula $min_{u}[g(x,u)+\frac{dJ^{*}}{dx}f(x,u)]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which says that if you have a control policy u and optimal cost to go function(
+ sum of one step cost )to prove that it is a optimal control policy then
+ it should statisfy the following equation:
+\end_layout
+
+\begin_layout Standard
+0=
+\begin_inset Formula $[g(x,u^{*})+\frac{dJ^{*}}{dx}f(x,u*)]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The optimal policy we find from HJB equation 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $u^{*}=-R^{-1}B^{T}Sx$
+\end_inset
+
+ =-k*x
+\end_layout
+
+\begin_layout Standard
+S is the solution of algebric Riccati equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $0=SA+A^{T}S-SBR^{-1}B^{T}S+Q$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then the optimal cost to go function is then 
+\begin_inset Formula $J(x,u)=X^{T}SX$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+>In matlab we have a direct command 
+\end_layout
+
+\begin_layout Standard
+K=LQR(A,B,Q,R) to find the gain matrix.
+\end_layout
+
+\end_body
+\end_document

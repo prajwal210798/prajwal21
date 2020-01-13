@@ -1,0 +1,349 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+THE OBSERVABILITY AND LQG
+\end_layout
+
+\begin_layout Abstract
+What if I can't measure all the state space variable or I dont want of the
+ system?Can we still develop the control law with the help of LQR optimization
+ to stabalize the the given system around a linear point?The answer is yes
+ we can , We can 
+\begin_inset Quotes eld
+\end_inset
+
+estimate
+\begin_inset Quotes erd
+\end_inset
+
+ other states with the help of a measured state, And then can apply our
+ previously discussed full state control law .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+The question is
+\end_layout
+
+\begin_layout Quote
+
+\emph on
+\begin_inset Quotes eld
+\end_inset
+
+Can I estimate any state X from measurement y(t)?
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Right Address
+\begin_inset Graphics
+	filename Pictures/obsv1.gif
+
+\end_inset
+
+ source:mathworks.com
+\end_layout
+
+\begin_layout Standard
+[HERE WE HAVE DISCUSSED HOW TO COMPUTE THE OBSERVABILITY OF SYSTEM MATRIX
+ IN MATLAB]
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+If the rank of observability matrix is same as system matrix then we can
+ measure the other states of system from the measured the state and if it
+ is less than the rank of the system matrix we cant.
+\end_layout
+
+\begin_layout Itemize
+SVD of observability matrix O .
+\end_layout
+
+\begin_layout Standard
+If the gain of the estimator matrix is K
+\begin_inset Formula $_{f}$
+\end_inset
+
+ and we define the the error of the estimator as E=x-
+\begin_inset Formula $x^{\mathcircumflex}$
+\end_inset
+
+then we can show that derivative of error this error is equal to the (A-K
+\begin_inset Formula $_{f}$
+\end_inset
+
+*C)*E.
+\end_layout
+
+\begin_layout Standard
+So if we design the matrix A-K
+\begin_inset Formula $_{f}$
+\end_inset
+
+*C such that the eigen values of this matrix is negative then we have we
+ can show that our estimates from Estimator x(hat) will converges to x.This
+ also means that we can use pole place technique to place the pole of this
+ system at our choice .
+\end_layout
+
+\begin_layout Standard
+COOL ISN'T??
+\end_layout
+
+\begin_layout Part*
+Kalman Filter 
+\end_layout
+
+\begin_layout Right Address
+
+\emph on
+The more you know about the it the more you will love it.
+\end_layout
+
+\begin_layout Standard
+Here we will use the kalman filter as optimal estimator given some measurement
+ noise (W
+\begin_inset Formula $_{n}$
+\end_inset
+
+) and some disturbance in the system (W
+\begin_inset Formula $_{d}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Let us assume that we have :
+\end_layout
+
+\begin_layout Standard
+Wd=gaussian disturbance Vd=variance;
+\end_layout
+
+\begin_layout Standard
+Wn=gaussian noise Vn=variance;
+\end_layout
+
+\begin_layout Subsection*
+How does it work ?
+\end_layout
+
+\begin_layout Standard
+The estimator will take the input u and measurement y and try to estimate
+ other states , We can also reason that if the system disturbance is way
+ more than than that of the measurement noise that probably it will give
+ more importace to measurement data to estimate the full state and if it
+ is other way around then it will give more importance to the system model
+ to estimate the other state space parameters.
+\end_layout
+
+\begin_layout Standard
+Taking these things into the account we define the cost function J to get
+ optimal equation to set the eigen values of (A-k
+\begin_inset Formula $_{f}$
+\end_inset
+
+C) and thus to find K
+\begin_inset Formula $_{f}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+IN MATLAB WE USE kf=lqe(A,C,Vd,Vn); to find kf.
+\end_layout
+
+\begin_layout Standard
+How easy it would be to estimate the other states given some measurement
+ y(t)...
+\end_layout
+
+\begin_layout Standard
+This would be given by determent of observability gramimam The higher the
+ value of observabililty gramiam the more it would be easier to estimate
+ other states.We should note that to find the gain of kalman estimator we
+ should have the stable system around a linear point.
+\end_layout
+
+\begin_layout Section*
+LQG==LQR+LQE..
+\end_layout
+
+\begin_layout Address
+\begin_inset Quotes eld
+\end_inset
+
+A LINEAR CONTROL MINIMIZING THE QUADRATIC COST FUNCTION IN GIVEN GAUSSIAN
+ NOISE.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can now combine the Linear quadratic estimator and linear quadratic regulator
+ to realize the controller which is now as linear quadratic gaussain controller
+ , Here we estimate the all states of 
+\end_layout
+
+\begin_layout Standard
+system by measuring the one or two states then this estimated states value(LQE)
+ will be fed in the LQR controller ..
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Pictures/obsv2.png
+
+\end_inset
+
+source:wikipedia
+\end_layout
+
+\begin_layout Standard
+LQG=
+\begin_inset Quotes erd
+\end_inset
+
+KALMAN FILTER STATE ESTIMATOR+Linear quadratic regulator
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now if cobinne the LQR controller and LQE estimator we would get state space
+ equation in a form which is shown below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\begin{array}{c}
+X.dot\\
+E.dot
+\end{array}$
+\end_inset
+
+=
+\begin_inset Formula $\begin{array}{cc}
+A-BK_{r} & BK_{r}\\
+0 & A-K_{f}C
+\end{array}$
+\end_inset
+
+ *
+\begin_inset Formula $\begin{array}{c}
+X\\
+E
+\end{array}$
+\end_inset
+
+ + 
+\begin_inset Formula $\begin{array}{cc}
+I & 0\\
+I & -K
+\end{array}$
+\end_inset
+
+*
+\begin_inset Formula $\begin{array}{c}
+W_{d}\\
+Wn
+\end{array}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is Awesome Here we can see that dynamics of system is particulary depends
+ on the eigen values of the A-B*Kr , lqr gain and the error of the estimator
+ it is independent of the gain of the estimator.
+\end_layout
+
+\end_body
+\end_document
