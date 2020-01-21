@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -21,6 +21,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -49,6 +51,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -57,7 +60,10 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -70,8 +76,264 @@
 
 \begin_body
 
+\begin_layout Title
+DYNAMICS AND CONTROL
+\end_layout
+
+\begin_layout Date
+1 January 2020
+\end_layout
+
+\begin_layout Standard
+The Application of control system is very vast, from controling the operational
+ amplifier to controlling the Mars Rover.
+ You cannot ask a robot to walk if it doesnt know how to plan its stable
+ trajectories in the influence of disturbance.
+ I believe that the era of control in dynamics has started from the balancing
+ of inverted pendulum <classical problem of control system>.
+ 
+\end_layout
+
+\begin_layout Standard
+It is hard and a can become a long process to learn control theory and how
+ to use it in Robotics, Smetimes it become confusing to where to start from,
+ and sometimes either we dont have introductry course in Control theory.
+ 
+\end_layout
+
+\begin_layout Standard
+This page will help you to get started.
+\end_layout
+
+\begin_layout Part*
+LIST OF TOPICS ALONG WITH SOME INFORMATION AND ITS LINKS TO MY PAGE AND
+ OTHER RESOURCES.
+\end_layout
+
+\begin_layout Standard
+Apart from the given list of topics that I have taken and will advised you
+ to take as well, I have written a case study focusing on the concepts that
+ I have learnt from these topics to build a mobile inverted pendulum.
+ 
+\end_layout
+
+\begin_layout Standard
+link is provided here:
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset href
+LatexCommand href
+name "CASE_STUDY_MOBILE_INVERTED_PENDULUM"
+target "www.html.com"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 
+\end_layout
+
+\begin_layout Standard
+I have experienced that each course teaches something new , It is necessary
+ that we have the learnings from previous topics before jumping to next
+ topic in list.
+\end_layout
+
+\begin_layout Enumerate
+Signal And System
+\end_layout
+
+\begin_layout Enumerate
+Introduction to Control System
+\begin_inset CommandInset href
+LatexCommand href
+name "link_yo_youtube_playlist"
+target "https://www.youtube.com/watch?v=PLgxjVQ6sZ8&list=PLyqSpQzTE6M8-wda5vbgHkMQTmu-21hRK&index=3"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Linear Algebra 
+\begin_inset CommandInset href
+LatexCommand href
+name "link_to you_tube_channel"
+target "https://www.youtube.com/watch?v=7UJ4CFRGd-U&list=PLE7DDD91010BC51F8"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Advanced Linear Continuous Control Systems
+\begin_inset CommandInset href
+LatexCommand href
+name "Link_to_course_website"
+target "https://nptel.ac.in/courses/108/107/108107115/"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Introduction to Control Engineering 
+\begin_inset CommandInset href
+LatexCommand href
+name "link_to_youtube_channel"
+target "https://www.youtube.com/watch?v=7LZSjgZz-Qw&list=PLxn52v8fxX5l5tGzU1NAxRDkgqxK0k5UZ"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Introduction to MATLAB by coursera
+\end_layout
+
+\begin_layout Enumerate
+Lectures by Steve Brunton (Bootcamp of control theory) from you tube
+\begin_inset CommandInset href
+LatexCommand href
+name "Link_to_you_tube_playlist"
+target "https://www.youtube.com/watch?v=Pi7l8mMjYVE&list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Advance Topics
+\end_layout
+
+\begin_layout Standard
+Before going further it is good to have some programming knowledge , Programming
+ knowledge is required to model system and in designing Controllers from
+ the system
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Programming Languages
+\end_layout
+
+\begin_layout Enumerate
+C,C++
+\end_layout
+
+\begin_layout Enumerate
+Python
+\end_layout
+
+\begin_layout Section*
+Courses on Optimal Control theory
+\end_layout
+
+\begin_layout Standard
+These first two courses will give you basic knowledge about the optimal
+ theory in general and then will talk about its application in control and
+ electrical system.Excellent course to get started in optimal control.
+\end_layout
+
+\begin_layout Enumerate
+Introduction of Optimal Control 
+\begin_inset CommandInset href
+LatexCommand href
+name "Link_to_you_tube"
+target "https://www.youtube.com/watch?v=LL20TZGXp3Q&list=PLbMVogVj5nJQNzJT6sYZpB7H1G6WF0FZ4"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Convex Optimization by Stanford 
+\begin_inset CommandInset href
+LatexCommand href
+name "Link_to_you_tube_playlist"
+target "https://www.youtube.com/watch?v=McLq1hEq3UY&list=PL3940DD956CDF0622"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This course has been designed to to apply the knowledge from convex optimization
+, Linear programming in solving the problem of robotics.
+ This was bit hard for me to understand at first but lectures from past
+ years helped me to understand the topics better.This Course talks about
+ the dynamics of the robotics system and how we can use them in controlling
+ the under-actuated robots.
+ 
+\end_layout
+
+\begin_layout Standard
+This course has a website also providing all the resources that we need,
+ python programming is used in solving problem .
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+UNDER-ACTUATED ROBOTICS BY MIT 
+\begin_inset CommandInset href
+LatexCommand href
+name "Underactuated_robotics_MIT"
+target "http://underactuated.mit.edu/underactuated.html"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Future of the Robotics
+\end_layout
+
+\begin_layout Standard
+These courses are for the future of robotics, Reinforcement learning in
+ general has the vast application in robotics and its use is increasing
+ exponentially.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Machine Learning by Coursera
+\end_layout
+
+\begin_layout Enumerate
+Deep learning by Coursera
+\end_layout
+
+\begin_layout Standard
+Learning previous two topics is to prepare you for the next topic, The next
+ topic is OP!
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Reinforcement learning 
 \end_layout
 
 \end_body

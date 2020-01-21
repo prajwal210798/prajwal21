@@ -116,51 +116,20 @@ I have experienced that each course teaches you something new , It is necessary
  topic in list.
 \end_layout
 
-\begin_layout Standard
-
-\end_layout
-
 \begin_layout Enumerate
 Signal And System
 \end_layout
 
 \begin_layout Enumerate
 Introduction to Control System
-\begin_inset CommandInset href
-LatexCommand href
-name "link_yo_youtube_playlist"
-target "https://www.youtube.com/watch?v=PLgxjVQ6sZ8&list=PLyqSpQzTE6M8-wda5vbgHkMQTmu-21hRK&index=3"
-literal "false"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Enumerate
 Linear Algebra 
-\begin_inset CommandInset href
-LatexCommand href
-name "link_to you_tube_channel"
-target "https://www.youtube.com/watch?v=7UJ4CFRGd-U&list=PLE7DDD91010BC51F8"
-literal "false"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Enumerate
-Advanced Linear Continuous Control Systems
-\begin_inset CommandInset href
-LatexCommand href
-name "Link_to_course_website"
-target "https://nptel.ac.in/courses/108/107/108107115/"
-literal "false"
-
-\end_inset
-
-
+Introduction to Advance Control System
 \end_layout
 
 \begin_layout Enumerate
@@ -168,20 +137,11 @@ literal "false"
 \end_layout
 
 \begin_layout Enumerate
-Introduction to MATLAB by coursera
+Introduction to MATLAB
 \end_layout
 
 \begin_layout Enumerate
 Lectures by Steve Brunton (Bootcamp of control theory) from you tube
-\begin_inset CommandInset href
-LatexCommand href
-name "Link_to_you_tube_playlist"
-target "https://www.youtube.com/watch?v=Pi7l8mMjYVE&list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m"
-literal "false"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section*
@@ -213,39 +173,26 @@ Courses on Optimal Control theory
 \end_layout
 
 \begin_layout Enumerate
-Introduction of Optimal Control 
-\begin_inset CommandInset href
-LatexCommand href
-name "Link_to_you_tube"
-target "https://www.youtube.com/watch?v=LL20TZGXp3Q&list=PLbMVogVj5nJQNzJT6sYZpB7H1G6WF0FZ4"
-literal "false"
-
-\end_inset
-
-
+Principal of Optimization
 \end_layout
 
 \begin_layout Enumerate
-Convex Optimization by Stanford 
-\begin_inset CommandInset href
-LatexCommand href
-name "Link_to_you_tube_playlist"
-target "https://www.youtube.com/watch?v=McLq1hEq3UY&list=PL3940DD956CDF0622"
-literal "false"
-
-\end_inset
-
-
+CONVEX OPTIMIZATION BY STANFORD
 \end_layout
 
 \begin_layout Enumerate
 
 \series bold
-UNDER-ACTUATED ROBOTICS BY MIT
+UNDERACTUATED ROBOTICS BY MIT
 \end_layout
 
 \begin_layout Part*
 FUTURE.....
+\end_layout
+
+\begin_layout Standard
+These topics are must to see how the robots will work/ controll themselves
+ in future.
 \end_layout
 
 \begin_layout Enumerate

@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>INVERTED PENDULUM CASE STUDY</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="inverted_pendulum_case_study.tex"> 
+<link rel="stylesheet" type="text/css" href="inverted_pendulum_case_study.css"> 
+</head><body 
+>
+   <div class="maketitle">
+
+
+
+<h2 class="titleHead">INVERTED PENDULUM CASE STUDY</h2>
+<div class="author" ></div><br />
+<div class="date" ><span 
+class="ecrm-1200">25th November 2019</span></div>
+   </div><div 
+class="abstract" 
+>
+<div class="center" 
+>
+<!--l. 17--><p class="noindent" >
+<!--l. 17--><p class="noindent" ><span 
+class="ecbx-0900">Abstract</span></div>
+     <!--l. 18--><p class="indent" >    <span 
+class="ecrm-0900">This is the case where we would learn how to design a mobile inverted</span>
+     <span 
+class="ecrm-0900">pendulum in matlab will talk about a lot of things which will be needed</span>
+     <span 
+class="ecrm-0900">to understand the concept, together with that I will also provide the link</span>
+     <span 
+class="ecrm-0900">of resource where you can study about these things these are for quick</span>
+     <span 
+class="ecrm-0900">refrence simple guide which will lead us in making of our robot &#8220;E&#8221;</span>
+</div>
+   <h1 class="likepartHead"><a 
+ id="x1-1000"></a>OBSERVABILITY AND CONTROLLABILITY</h1>
+   <h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>condition of state controllability</h4>
+<!--l. 33--><p class="indent" >   <span class="likesubparagraphHead"><a 
+ id="x1-3000"></a><span 
+class="ecbx-1000">A system is said to be controllable at time </span><span 
+class="cmmi-10">t</span><sub><span 
+class="cmr-7">0</span></sub> <span 
+class="ecbx-1000">if it is possible by means</span>
+<span 
+class="ecbx-1000">of an unconstrained control vector to transfer the system from any</span>
+<span 
+class="ecbx-1000">initial state </span><span 
+class="cmmi-10">x</span><img 
+src="inverted_pendulum_case_study0x.png" alt="(t0)"  class="left" align="middle"> <span 
+class="ecbx-1000">to any other state x(t</span><sub><span 
+class="cmr-7">1</span></sub><span 
+class="ecbx-1000">) in a finite interval of</span>
+<span 
+class="ecbx-1000">time.</span></span>
+   Matrix [B<img 
+src="inverted_pendulum_case_study1x.png" alt="..."  class="vdots" >AB<img 
+src="inverted_pendulum_case_study2x.png" alt="..."  class="vdots" >A<sup><span 
+class="cmr-7">2</span></sup>B<img 
+src="inverted_pendulum_case_study3x.png" alt="..."  class="vdots" >..........A<sup><span 
+class="cmmi-7">n</span><span 
+class="cmsy-7">-</span><span 
+class="cmr-7">1</span></sup>B] is known as <span 
+class="ecti-1000">state controllability matrix</span>
+<span 
+class="ecti-1000">.</span>
+<!--l. 38--><p class="indent" >   The rank of this matrix should be n
+
+<!--l. 40--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-4000"></a>Output Controllability</h4>
+<!--l. 42--><p class="noindent" >Output controllability generally means, that we can steer output of dynamical system
+independently of its state vector. A system is said to be completely output
+controllable if it is possible to construct an unconstrained control vector u(t) that will
+transfer any given initial output y at t<sub><span 
+class="cmr-7">0</span></sub> to any final output y at t<sub><span 
+class="cmr-7">1</span></sub> in a finite time
+interval t<sub><span 
+class="cmr-7">0</span></sub> to t<sub><span 
+class="cmr-7">1</span></sub> .
+<!--l. 49--><p class="indent" >   Outtput controllability matrix oC =
+<!--l. 51--><p class="indent" >   [CB CAB . . . CA<sup><span 
+class="cmmi-7">n</span><span 
+class="tcrm-1000">-</span><span 
+class="cmr-7">1</span></sup>B D] and it is obtained the following result. Dynamical
+system is output controllable if and only if rank oC = p
+<!--l. 55--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-5000"></a>OBSERVABILITY</h4>
+<!--l. 57--><p class="noindent" >A system is said to be observable at time <span 
+class="cmmi-10">t</span><sub><span 
+class="cmr-7">0</span></sub> if, with the system in state <span 
+class="cmmi-10">x</span><img 
+src="inverted_pendulum_case_study4x.png" alt="(t0)"  class="left" align="middle">, it is
+possible to determine this state from the observation of the output over a
+finite time interval.The system is said to be completely observable if every
+state xAt 0 B can be determined from the observation of y(t) over a finite
+time interval, t<sub><span 
+class="cmr-7">0</span></sub> to t<sub><span 
+class="cmr-7">1</span></sub> . The system is, therefor, completely observable if
+every transition of the state eventually affects every ele- ment of the output
+vector.
+<!--l. 66--><p class="indent" >   A system is completely observable if the rank of the matrix
+<!--l. 68--><p class="indent" >   <img 
+src="inverted_pendulum_case_study5x.png" alt="&#x230A;       &#x230B;
+|   C   |
+||  CA 2 ||
+|&#x2308;  CA   |&#x2309;
+    .n-1
+  CA"  class="left" align="middle"> is n
+<!--l. 76--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-6000"></a>CONTROLLABILITY AND Controllability Gramian:</h3>
+<!--l. 78--><p class="noindent" >Matrix [B<img 
+src="inverted_pendulum_case_study6x.png" alt=".
+.."  class="vdots" >AB<img 
+src="inverted_pendulum_case_study7x.png" alt=".
+.."  class="vdots" >A<sup><span 
+class="cmr-7">2</span></sup>B<img 
+src="inverted_pendulum_case_study8x.png" alt=".
+.."  class="vdots" >..........A<sup><span 
+class="cmmi-7">n</span><span 
+class="cmsy-7">-</span><span 
+class="cmr-7">1</span></sup>B] is known as <span 
+class="ecti-1000">controllability matrix.</span>
+<!--l. 81--><p class="noindent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-7000"></a>Controllability Gramian:</h5>
+<!--l. 83--><p class="noindent" ><span 
+class="ecti-1000">High level description:</span>
+<!--l. 85--><p class="indent" >   <span 
+class="cmsy-10"><img 
+src="cmsy10-58.png" alt="X" class="10x-x-58" /></span><img 
+src="inverted_pendulum_case_study9x.png" alt="(t)"  class="left" align="middle"> <span 
+class="cmr-10">=</span> <span 
+class="cmex-10">&#x222B;</span>
+           <sub><span 
+class="cmr-7">0</span></sub><sup><span 
+class="cmmi-7">t</span></sup>e<sup><span 
+class="cmmi-7">A&#x03BE;</span></sup><span 
+class="cmmi-10">BB</span><sup><span 
+class="cmmi-7">T</span></sup><span 
+class="cmmi-10">e</span><sup><span 
+class="cmmi-7">A</span><sup><span 
+class="cmmi-5">T</span></sup><span 
+class="cmmi-7">&#x03BE;</span>
+     </sup><span 
+class="cmmi-10">d&#x03BE; &#x03F5;</span><span 
+class="msbm-10">&#x211D;</span><sup>nxn</sup>
+<!--l. 88--><p class="indent" >   <span 
+class="cmmi-10">X</span><span 
+class="cmr-10">(</span><span 
+class="cmmi-10">t</span><span 
+class="cmr-10">) </span>is known as Controllability Gramian.
+<!--l. 90--><p class="indent" >   This measure has physical meaning of minimum input energy to change the
+states. However, it is hard to use this method for unstable systems because the
+steady-state value of Gramian cannot be defined.
+<!--l. 94--><p class="indent" >   single value decomposition:
+<!--l. 96--><p class="indent" >   X<sub><span 
+class="cmmi-7">t</span></sub><span 
+class="cmmi-10">&#x03B6;</span>=<span 
+class="cmmi-10">&#x03BB;&#x03B6;</span>
+
+<!--l. 98--><p class="indent" >   The eigen values of this matrix will be positive.
+<!--l. 100--><p class="indent" >   &#8220;<span 
+class="ecti-1000">The eigen vectors corresponding to the biggest eigen value are the most</span>
+<span 
+class="ecti-1000">controllable directions in state space&#8221;.</span>
+<!--l. 103--><p class="indent" >
+   <h1 class="likepartHead"><a 
+ id="x1-8000"></a>The controllability and observability of linearnized inverted pendulum</h1>
+   <h3 class="likesectionHead"><a 
+ id="x1-9000"></a>State controllability</h3>
+<!--l. 107--><p class="noindent" >In matlab a single line formula will give the controllability matrix
+<!--l. 109--><p class="indent" >   ctrb(A,B)
+<!--l. 111--><p class="indent" >   rank of this matrix should be n in our case it should be 4
+<!--l. 113--><p class="indent" >
+   <h1 class="likepartHead"><a 
+ id="x1-10000"></a>Observability</h1>
+<!--l. 115--><p class="noindent" >obsv(A,C) will give the observability matrix for the system and for the specific
+combination of output.
+<!--l. 118--><p class="indent" >   rank of this matrix tell us that if the system is observable or not.
+<!--l. 120--><p class="indent" >   Result:
+<!--l. 122--><p class="indent" >   In this we see that if measure the position of the cart then we can observe or say
+estimate the other states from this this output.
+<!--l. 125--><p class="indent" >   But in the other case if we try to estimate other states from pendulum position
+then it is not possible.
+<!--l. 128--><p class="indent" >   Reason:
+<!--l. 130--><p class="indent" >   Upon seeing the observable matrix we see that first column of the matrix is zero
+the reason is that state position is independent from other states it does not
+depend on the states . So other states does not give any information of this
+particular state ,So we need to always find the postion state from sensor
+.
+<!--l. 136--><p class="indent" >   <img 
+src="0_home_prajwal-thakur_website_design_main_web_w___rtificial_eye_for_control_system_Pictures_3.png" alt="PIC"  
+>
+<!--l. 138--><p class="indent" >   Lets take another case in this case we dont want to control the position of the
+cart , It is free to move around the room but we do need to control the
+other states viz [speed, tilt angle of pendulum, angular rate of falling of
+pendulum]
+<!--l. 143--><p class="indent" >   In general case we may want to have speed=0;tilt angle=180; angular
+rate=0;
+<!--l. 146--><p class="indent" >   lets see the observability and controllability in this case
+<!--l. 148--><p class="indent" >   Here order of the system is 3
+<!--l. 150--><p class="indent" >   <img 
+src="1_home_prajwal-thakur_website_design_main_web_w___rtificial_eye_for_control_system_Pictures_2.png" alt="PIC"  
+>
+<!--l. 152--><p class="indent" >   Here we see that system is both observable and controllable both.
+<!--l. 154--><p class="indent" >
+
+   <h1 class="likepartHead"><a 
+ id="x1-11000"></a>CONTROL SYSTEM DESIGN IN STATE SPACE </h1>
+   <div 
+class="abstract" 
+>
+<div class="center" 
+>
+<!--l. 155--><p class="noindent" >
+<!--l. 155--><p class="noindent" ><span 
+class="ecbx-0900">Abstract</span></div>
+<!--l. 155--><p class="noindent" >
+     <!--l. 156--><p class="indent" >    <span 
+class="ecrm-0900">One the the thing that I like about the working in State space is that</span>
+     <span 
+class="ecrm-0900">we work directly in time domain. We can easily interpret that the output</span>
+     <span 
+class="ecrm-0900">of the system with respect to time .</span>
+     <!--l. 160--><p class="indent" >    <span 
+class="ecrm-0900">Here I touch upon the various Basic Ideas that how can we control the</span>
+     <span 
+class="ecrm-0900">closed system varoious method will be discussed in this section.</span>
+</div>
+<!--l. 164--><p class="indent" >
+   <h1 class="likepartHead"><a 
+ id="x1-12000"></a>POLE PLACEMENT TECHNIQUE</h1>
+<!--l. 166--><p class="noindent" >We assume that all state variables are <span 
+class="ecti-1000">measurable </span>and are available for feedback. It
+can be shown that if the system considered is completely state controllable, then
+<span 
+class="ecbx-1000">poles of the closed-loop system </span>may be placed at any desired locations by means
+of state feedback through an appropriate state feedback gain matrix.
+<!--l. 172--><p class="indent" >   <img 
+src="2_home_prajwal-thakur_website_design_main_web_w___rtificial_eye_for_control_system_Pictures_1.png" alt="PIC"  
+>
+<!--l. 174--><p class="indent" >
+   <h1 class="likepartHead"><a 
+ id="x1-13000"></a>Determination of gain matrix using Ackerman&#8217;s formula</h1>
+<!--l. 176--><p class="noindent" >u=-kx
+<!--l. 178--><p class="indent" >   k=[0 0 0 . . .. .. ..1][B : AB : A<sup><span 
+class="cmr-7">2</span></sup>B :...........:A<sup><span 
+class="cmmi-7">n</span><span 
+class="cmsy-7">-</span><span 
+class="cmr-7">1</span></sup>B]<sup><span 
+class="cmsy-7">-</span><span 
+class="cmr-7">1</span></sup><span 
+class="cmsy-10">&#x2205;</span><img 
+src="inverted_pendulum_case_study10x.png" alt="(A)"  class="left" align="middle">
+<!--l. 180--><p class="indent" >   where <span 
+class="cmsy-10">&#x2205;</span><img 
+src="inverted_pendulum_case_study11x.png" alt="(A)"  class="left" align="middle"> = a<sub><span 
+class="cmr-7">3</span></sub> I + a<sub><span 
+class="cmr-7">2</span></sub> A + a<sub><span 
+class="cmr-7">1</span></sub> A<sup><span 
+class="cmr-7">2</span></sup> + A<sup><span 
+class="cmr-7">3</span></sup>
+<!--l. 183--><p class="indent" >   and a<sub><span 
+class="cmr-7">3</span></sub>,a<sub><span 
+class="cmr-7">2</span></sub>,a<sub><span 
+class="cmr-7">1</span></sub> are the coffecints of desired cahracterstics equation having desired
+poles.
+<!--l. 186--><p class="indent" >   One may ask that how do we determined the position of poles?
+<!--l. 188--><p class="indent" >   One can estimate or can approximate the <span 
+class="ecbx-1000">dominant desired poles </span>from the
+<span 
+class="ecbx-1000">root locus </span>.Other roots can act as a non dominant poles.
+<!--l. 192--><p class="indent" >   In matlab we will use place command and to get the gain matrix k ,then we will
+see the eigen values of the modified sytem matrix viz A-B*k
+<!--l. 195--><p class="indent" >   <img 
+src="3_home_prajwal-thakur_website_design_main_web_w___rtificial_eye_for_control_system_Pictures_4.png" alt="PIC"  
+>
+<!--l. 197--><p class="indent" >   one eigen values of the system matrix is at positive half of complex plane . So any
+input to the system will result in the un-stability in the system.
+<!--l. 201--><p class="indent" >   here input to the system is the step input having magnitude of 0.02.
+<!--l. 203--><p class="indent" >   Next I place the eigen values of the system randomly at left of complex plane
+without any performance criteria and then i have checked the system stability means
+
+either the system is stable or system converges to the values viz position at -0.06 and
+pedulum position at at -0.01.
+<!--l. 208--><p class="indent" >
+   <h1 class="likepartHead"><a 
+ id="x1-14000"></a>HOW TO GET RID OF STEADY STATE ERROR:</h1>
+   <div 
+class="abstract" 
+>
+<div class="center" 
+>
+<!--l. 209--><p class="noindent" >
+<!--l. 209--><p class="noindent" ><span 
+class="ecbx-0900">Abstract</span></div>
+<!--l. 209--><p class="noindent" >
+     <!--l. 210--><p class="indent" >    <span 
+class="ecrm-0900">I WILL USE TWO METHODS TO GET RID OF STEADY STATE</span>
+     <span 
+class="ecrm-0900">ERROR</span>
+</div>
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-14002x1">INTEGRAL CONTROL
+     </li>
+     <li 
+  class="enumerate" id="x1-14004x2">Redifining the control law <span 
+class="cmmi-10">u </span><span 
+class="cmr-10">= </span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">k</span><span 
+class="cmsy-10">*</span><span 
+class="cmmi-10">x</span><span 
+class="cmr-10">+</span><span 
+class="cmmi-10">T</span><sub><span 
+class="cmmi-7">s</span></sub><span 
+class="cmsy-10">*</span><span 
+class="cmmi-10">r </span>where r is the refrence input
+     to the system</li></ol>
+   <h3 class="likesectionHead"><a 
+ id="x1-15000"></a>Redifining the control law <span 
+class="cmmi-10">u </span><span 
+class="cmr-10">= </span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">k </span><span 
+class="cmsy-10">* </span><span 
+class="cmmi-10">x </span><span 
+class="cmr-10">+ </span><span 
+class="cmmi-10">T</span><sub><span 
+class="cmmi-7">s</span></sub> <span 
+class="cmsy-10">* </span><span 
+class="cmmi-10">r</span></h3>
+<!--l. 220--><p class="noindent" ><img 
+src="4_home_prajwal-thakur_website_design_main_web_w___rtificial_eye_for_control_system_Pictures_6.png" alt="PIC"  
+>
+<!--l. 222--><p class="indent" >   By choosing the appropriate T<sub><span 
+class="cmmi-7">s</span></sub> Matrix the steady state error can be made zero
+.
+<!--l. 225--><p class="indent" >   <span 
+class="cmmi-10">T</span><sub><span 
+class="cmmi-7">s</span><span 
+class="cmr-7">=</span><img 
+src="inverted_pendulum_case_study12x.png" alt="-----1-----
+C(A-B*KC)-1B"  class="frac" align="middle"></sub>
+<!--l. 227--><p class="indent" >   Note that this development assumed that r was constant, but it could also be
+used where r is a slowly time-varying command.
+<!--l. 230--><p class="indent" >   THE PICTURE BELOW SHOWS THE OUTPUT RESPONSE WITH
+MODIFYING THE CONTROL .<span 
+class="cmmi-10">u </span><span 
+class="cmr-10">= </span><span 
+class="cmsy-10">-</span><span 
+class="cmmi-10">k </span><span 
+class="cmsy-10">* </span><span 
+class="cmmi-10">x </span><span 
+class="cmr-10">+ </span><span 
+class="cmmi-10">T</span><sub><span 
+class="cmmi-7">s</span></sub> <span 
+class="cmsy-10">* </span><span 
+class="cmmi-10">r</span>
+<!--l. 233--><p class="indent" >   In the following program I wanted to eliminate the error from pendulum position
+but it also lead the error in cart position near to zero.
+<!--l. 236--><p class="indent" >   <img 
+src="5_home_prajwal-thakur_website_design_main_web_w____control_system_Pictures_error_elimination1.png" alt="PIC"  
+>
+<!--l. 238--><p class="indent" >   Picture Below shows the output of cart-pendulum system when without error
+elimination
+<!--l. 241--><p class="indent" >   <img 
+src="6_home_prajwal-thakur_website_design_main_web_w___rtificial_eye_for_control_system_Pictures_8.png" alt="PIC"  
+>  
+</body></html> 
+
+
+
