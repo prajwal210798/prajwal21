@@ -169,92 +169,7 @@ inspired robots and aerial vehicles.
 <i class="fa fa-quote-right" aria-hidden="true"></i></h3>
 <!--//Where do I have interest-->
 
-<!--What does it take to learn Robotics??-->
-<section class="services pt-5" id="waht does it take to learn robotics?">
-	<div class="container py-lg-5">
-		<h3><b><i><center>What do you need to  build a Bumblebee ?</center></i></b></h3>
-		<br>
-		<br>
-		<h3><b><i><center>If you are like Prajwal who takes interest to build Bumblebee, then I believe that you need to be interested in three things!!
-			<br>
-			<li>Physics</li>
-			<li>Mathematics</li>
-			<li>Programming</li>
-		</center></i></b></h3>
-		<br>
-		<br>
-		<h3><i><center>Here is the elegant example of a problem of finding poilicy (this case it is the states of distance from the setpoint and speed)</center></i></h3>
-		<center>*This example has been taken from Prajwal's solution of problem set 2 of Underactuacted Robotics by MIT</center>
-		<br>
-		<br>
-		<h5><center>
- 
-Optimal Controller for the Double Integrator
 
-In this problem, we'll consider the optimal control problem for the 1-dimensional input-constrained double integrator described by
-<br>
-acceleration = speed ,|speed|< One
-here q(double dot) is representing acceleration and  u is representing speed
-
-
-<p align="center">
-  <img src="images/double_integrator.png" width="450"/>
-</p>    
-<p style="text-align: center;">Figure: Simple drawing of a double integrator</p>
-<br>
-<br>
-Here comes the Math:
-<br>
-<br>
-we want the optimal controller for a minimum-time cost function.
-Remember that for "minimum-time" problems, we just have the cost function:
-<p class="noindent" >
-	<center class="math-display" >
-
-
-		<img 
- src="images/newfile110x.png" alt="    &#x222B;
-	  &#x221E;
- J =  0 g(x(t),u(t)) dt
- " class="math-display" ></center>
- 
- for: g(x,u)=0 if x=0 <br>1 otherwise <br>
- which gives us:
- <!--l. 12--><p class="indent" >
-	<center class="math-display" >
- 
-	
-		<img 
- src="images/newfile111x.png" alt="J = tf
- " class="math-display" ></center>
- <!--l. 14--><p class="indent" >   Where <span 
- class="cmmi-10">t</span><sub><span 
- class="cmmi-7">f</span></sub> is the time needed to reach the desired state, 0. So our cost function is
- just the time needed to reach 0.  
-
-		</center></h5>
-	
-		<br><br>
-		Why do we need programming here ? <br>
-		To find the solution by integrating the  equation over the given set of given state space.<br>
-		This is done through  Dynamic Programming.Lets see the its simple python script for finding the the solution;
-	
-		<figure>
-			<img src="images/solution.png" alt="" class="img-fluid" />
-			
-		</figure>
-
-		<figure>
-			<img src="images/code.png" alt="" class="img-fluid" />
-			
-		</figure>
-
-
-        
-	</div>
-</section>
-
-<!-- //waht does it take -->
 
 <!-- Research Project-->
 <section class="services pt-5" id="My projects">
@@ -354,12 +269,12 @@ Remember that for "minimum-time" problems, we just have the cost function:
 			</div>
 			<div class="col-lg-3 col-md-4 col-6 p-0">
 				<div class="box9">
-					<img src="images/myphoto.jpg" alt="Follow_your_passion" class="img-fluid" />
+					<img src="images/myphoto.jpg" alt="Matlab_mobile_inverted" class="img-fluid" />
 					<div class="box-content">
-						<h3 class="title">Follow_your_passion</h3>
+						<h3 class="title">Mobile_Inverted_Pendulum_Matlab</h3>
 						<ul class="icon">
 							<!--<li><a href="#"><i class="fa fa-search"></i></a></li>-->
-							<!--<li><a href="#"><i class="fa fa-github"></i></a></li>-->
+							<li><a href="https://github.com/prajwal210798/Mobile_inverted_pendulum"><i class="fa fa-github"></i></a></li>
 						</ul>
 					</div>
 				</div>
@@ -454,6 +369,92 @@ Remember that for "minimum-time" problems, we just have the cost function:
 		</div>
 	</div>
 </section>
+<!--What does it take to learn Robotics??-->
+<section class="services pt-5" id="waht does it take to learn robotics?">
+	<div class="container py-lg-5">
+		<h3><b><i><center>What do you need to  build a Bumblebee ?</center></i></b></h3>
+		<br>
+		<br>
+		<h3><b><i><center>If you are like Prajwal who takes interest to build Bumblebee, then I believe that you need to be interested in three things!!
+			<br>
+			<li>Physics</li>
+			<li>Mathematics</li>
+			<li>Programming</li>
+		</center></i></b></h3>
+		<br>
+		<br>
+		<h3><i><center>Here is the elegant example of a problem of finding poilicy (this case it is the states of distance from the setpoint and speed)</center></i></h3>
+		<center>*This example has been taken from Prajwal's solution of problem set 2 of Underactuacted Robotics by MIT</center>
+		<br>
+		<br>
+		<h5><center>
+ 
+Optimal Controller for the Double Integrator
+
+In this problem, we'll consider the optimal control problem for the 1-dimensional input-constrained double integrator described by
+<br>
+acceleration = speed ,|speed|< One
+here q(double dot) is representing acceleration and  u is representing speed
+
+
+<p align="center">
+  <img src="images/double_integrator.png" width="450"/>
+</p>    
+<p style="text-align: center;">Figure: Simple drawing of a double integrator</p>
+<br>
+<br>
+Here comes the Math:
+<br>
+<br>
+we want the optimal controller for a minimum-time cost function.
+Remember that for "minimum-time" problems, we just have the cost function:
+<p class="noindent" >
+	<center class="math-display" >
+
+
+		<img 
+ src="images/newfile110x.png" alt="    &#x222B;
+	  &#x221E;
+ J =  0 g(x(t),u(t)) dt
+ " class="math-display" ></center>
+ 
+ for: g(x,u)=0 if x=0 <br>1 otherwise <br>
+ which gives us:
+ <!--l. 12--><p class="indent" >
+	<center class="math-display" >
+ 
+	
+		<img 
+ src="images/newfile111x.png" alt="J = tf
+ " class="math-display" ></center>
+ <!--l. 14--><p class="indent" >   Where <span 
+ class="cmmi-10">t</span><sub><span 
+ class="cmmi-7">f</span></sub> is the time needed to reach the desired state, 0. So our cost function is
+ just the time needed to reach 0.  
+
+		</center></h5>
+	
+		<br><br>
+		Why do we need programming here ? <br>
+		To find the solution by integrating the  equation over the given set of given state space.<br>
+		This is done through  Dynamic Programming.Lets see the its simple python script for finding the the solution;
+	
+		<figure>
+			<img src="images/solution.png" alt="" class="img-fluid" />
+			
+		</figure>
+
+		<figure>
+			<img src="images/code.png" alt="" class="img-fluid" />
+			
+		</figure>
+
+
+        
+	</div>
+</section>
+
+<!-- //waht does it take -->
 <!-- //quote -->
 <!-- process -->
 <!--<section class="experience py-5" id="experience">
