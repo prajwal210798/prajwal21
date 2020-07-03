@@ -65,161 +65,150 @@
             
             </p>
             <p align="justify" style="margin-bottom: 0cm; line-height: 115%"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>Introduction:	</b></span></font></font></p>
-            <p align="justify" style="margin-bottom: 0cm; line-height: 115%"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Most
-            of the conventional detection and tracking algorithms/systems for
-            moving objects includes preprocessing, background subtraction (which
-            includes dynamic background modeling), detection foreground object(s)
-            (especially the moving objects), post-processing, and tracking (with
-            foreground boundary/mask) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[1]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
-            The tracking process is achieved by using a combination of spatial
-            and temporal information about the moving object. The underlying
-            algorithm decides about the movement of an object based on the
-            spatial and temporal coherency. However, the process of background
-            modeling is quite challenging due to the factors like dynamic
-            background, variation in illuminations, change in the scene,
-            mis-classification of shadow as an object, camouflage and
-            bootstrapping problems </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[2,3]
-            </span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">etc.
-            Moreover, background subtraction is quite useful for a video from a
-            static camera but, delays the operation of object tracking in a video
-            of dynamic background. Therefore, recent trends avoid the
-            background-subtraction step and use machine learning approaches for
-            detection, classification and tracking of moving objects. </span></font></font>
-            </p>
-            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
-            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">An
-            input image is most often pre-processed for normalizing contrast and
-            brightness effects </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[4]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
-            A very common preprocessing step is to subtract the mean of image
-            intensities and divide by the standard deviation. Sometimes, gamma
-            correction produces slightly better results. On the other hand, a
-            color space transformation (e.g. RGB to LAB color space) may help to
-            get better results while dealing with color images. Finally, as part
-            of pre-processing, an input image or patch of an image is also
-            cropped and resized to a fixed size. This is essential for the next
-            step, i.e. feature extraction, which requires a fixed sized image for
-            its operation. However, one may remember that it is hard to predict a
-            particular pre-processing algorithm that best suits a typical
-            application. Fortunately, the good thing is that the choice of the
-            pre-processing algorithm affects minimally in the results, and slight
-            betterment in the result can only be obtained with a heuristic choice
-            of the algorithm. </span></font></font>
-            </p>
-            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
-            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">The
-            preprocessing step is followed by the Feature Extraction. Actually,
-            the input image contains much extra information that is not necessary
-            for classification. Therefore, prior to image classification, the
-            target image is simplified by extracting the important information
-            contained in the image and leaving out the rest. For example, if one
-            wants to find the shirt and coat buttons in images, he/she will
-            notice a significant variation in RGB pixel values. However, the
-            image can be simplified by running an edge detector on the image. It
-            is still easily possible to discern the circular shape of the buttons
-            in these edge images. Therefore, it can be concluded that edge
-            detection retains the essential information while throwing away
-            non-essential information. However, designing these features is
-            crucial to the performance of the algorithm in a traditional computer
-            vision approaches. Actually, a much better performance can be
-            achieved finding much more reliable features than the simple edge
-            detection. In the example of shirt and coat buttons, a good feature
-            detector will not only capture the circular shape of the buttons but
-            also gather information about how buttons are different from other
-            circular objects like car tires. Some well-known features used in
-            computer vision are Haar-like features (introduced by Viola and
-            Jones) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[5]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
-            Histogram of Oriented Gradients (HOG) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[6,7]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
-            Scale-Invariant Feature Transform (SIFT) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[8,9]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
-            Speeded Up Robust Feature (SURF) </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[10]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">
-            etc.</span></font></font></p>
-            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
-            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Now,
-            after converting an image to a corresponding feature vector,
-            classification algorithm takes this feature vector as input and
-            outputs a class label. However, these classification algorithms are
-            required to be trained before it can actually determine the classes
-            of the objects. The algorithms need to be trained by showing
-            thousands of examples of images from different target and known
-            classes. Different learning algorithms learn differently, but the
-            general principle is that the learning algorithms treat feature
-            vectors as points in higher dimensional space, and try to find planes
-            / surfaces that partition the higher dimensional space in such a way
-            that all examples belonging to the same class are on one side of the
-            plane / surface. </span></font></font>
-            </p>
-            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
-            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">The
-            classification algorithms/classifiers are majorly clustered in -
-            Linear classifier, Quadratic classifier, Bayesian classifier, Neural
-            Network, Kernel estimation and k-nearest neighbor, Decision Trees,
-            Support Vector Machines, Maximum Entropy Classifier etc. Among these
-            algorithms, the mostly cultured classifier is the Neural Network
-            based classifier.</span></font></font></p>
-            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
-            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Now,
-            an object detection and classification system takes a classifier for
-            an object of interest and evaluates it at various locations and
-            scales in a test image. Different systems use a sliding window
-            approach where the classifier is run at evenly spaced locations over
-            the entire image. On the other hand, the popular R-CNN use region
-            proposal methods to, first, generate potential bounding boxes in an
-            image and then run a classifier on these proposed boxes </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[11]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
-            After classification, post-processing is used to refine the bounding
-            box, eliminate duplicate detections, and rescore the box based on
-            other objects in the scene. However, these complex pipelines are slow
-            and hard to optimize because each individual component must be
-            trained separately. To resolve this limitation, some new algorithms
-            like YOLO </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[11]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">
-            has been proposed which trains the classifier to find multiple
-            objects in a single frame in one go. The algorithm has proved its
-            potentiality in terms of speed and accuracy.</span></font></font></p>
-            <p align="justify" style="text-indent: 1.27cm; margin-bottom: 0cm; line-height: 115%">
-            <font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><b>Nevertheless,
-            in spite of these long sustained researches in this field, there
-            still exists a significant probability of false-detection and
-            missed-detection when the object is detected in a single frame. This
-            is because; the current autonomous unmanned aerial platforms simply
-            implement a passive object detection running on the live camera
-            images </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[12]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
-            On the other hand, Humans lingers its gaze in an object until it is
-            detected properly </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[13]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
-            The gaze tries to obtain a temporal continuity between the
-            consecutive frames while the object is in motion. Otherwise, the
-            continuity is obtained by moving our gaze around the object to
-            collect more features about it. This work gathers inspiration from
-            the above mentioned behavior which occurs naturally across humans,
-            birds and most animals. Some strategies have also been proposed in
-            the same direction </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[14]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">,
-            but they yet required to be improved further for real-time
-            implementation. Temporal verification of object in continuous videos
-            is required to improve the accuracy or confidence of detection.
-            Temporal consistency dictionary learning may also be incorporated
-            further in improvement of the tracking algorithm </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[15]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
-            Multiple frame may be captured by the platform by maneuvering it in a
-            straight line forward motion (dolly), or sideways motion (truck), or
-            up-down motion (pedestal); and their correlation may be utilized to
-            enhance the confidence, and hence to improve the accuracy in
-            detection </span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[16-19]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">
-            as well as tracking </b></span></font></font><font color="#0070c0"><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">[20,21]</span></font></font></font><font face="Times New Roman, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">.
-             </span></font></font>
-            </p>
-
-            <br>
-            
-            </p>
-            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br>
-            
-            </p>
-            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br>
-            
-            </p>
-            <p align="justify" style="margin-bottom: 0cm; line-height: 100%"><br>
-            
-            </p>
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><!--This file was converted to xhtml by LibreOffice - see http://cgit.freedesktop.org/libreoffice/core/tree/filter/source/xslt for the code.--><head profile="http://dublincore.org/documents/dcmi-terms/"><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/><title xml:lang="en-US">- no title specified</title><meta name="DCTERMS.title" content="" xml:lang="en-US"/><meta name="DCTERMS.language" content="en-US" scheme="DCTERMS.RFC4646"/><meta name="DCTERMS.source" content="http://xml.openoffice.org/odf2xhtml"/><meta name="DCTERMS.issued" content="2020-06-27T11:28:16.003485789" scheme="DCTERMS.W3CDTF"/><meta name="DCTERMS.modified" content="2020-07-03T06:59:43.193134084" scheme="DCTERMS.W3CDTF"/><meta name="DCTERMS.provenance" content="" xml:lang="en-US"/><meta name="DCTERMS.subject" content="," xml:lang="en-US"/><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" hreflang="en"/><link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" hreflang="en"/><link rel="schema.DCTYPE" href="http://purl.org/dc/dcmitype/" hreflang="en"/><link rel="schema.DCAM" href="http://purl.org/dc/dcam/" hreflang="en"/><style type="text/css">
+                @page {  }
+                table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+                td, th { vertical-align:top; font-size:12pt;}
+                h1, h2, h3, h4, h5, h6 { clear:both;}
+                ol, ul { margin:0; padding:0;}
+                li { list-style: none; margin:0; padding:0;}
+                /* "li span.odfLiEnd" - IE 7 issue*/
+                li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+                span.footnodeNumber { padding-right:1em; }
+                span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+                span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+                .fr1 { font-size:12pt; margin-left:0cm; margin-right:0cm; font-family:Liberation Serif; vertical-align:middle; margin-top:0cm; margin-bottom:0cm; }
+                .P1 { font-size:12pt; font-family:Liberation Serif; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; }
+                .P10_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P10 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P10_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P11_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P11 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P11_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P12_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P12 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P12_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P13_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P13 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P13_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P14_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P14 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P14_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P15_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P15 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P15_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P16_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P16 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P16_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#1c1c1c; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P17_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#0066b3; font-style:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P17 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#0066b3; font-style:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P17_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:0cm; color:#0066b3; font-style:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P18_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:1.27cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P18 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:1.27cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P18_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:1.27cm; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P19_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-top:0cm; line-height:115%; text-align:justify ! important; text-indent:1.27cm; color:#1c1c1c; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P19 { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; line-height:115%; text-align:justify ! important; text-indent:1.27cm; color:#1c1c1c; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P19_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-left:0cm; margin-right:0cm; margin-bottom:0cm; line-height:115%; text-align:justify ! important; text-indent:1.27cm; color:#1c1c1c; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P2 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#1c1c1c; font-style:normal; background-color:transparent; }
+                .P20_borderStart { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-top:0cm; line-height:115%; text-align:justify ! important; color:#1c1c1c; font-style:normal; background-color:transparent; padding-bottom:0cm;  border-bottom-style:none; }
+                .P20 { font-size:12pt; font-family:Times new roman; writing-mode:page; line-height:115%; text-align:justify ! important; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm; padding-bottom:0cm;  border-top-style:none; border-bottom-style:none; }
+                .P20_borderEnd { font-size:12pt; font-family:Times new roman; writing-mode:page; margin-bottom:0cm; line-height:115%; text-align:justify ! important; color:#1c1c1c; font-style:normal; background-color:transparent; padding-top:0cm;  border-top-style:none;}
+                .P3 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#1c1c1c; font-style:normal; background-color:transparent; }
+                .P4 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#1c1c1c; font-style:normal; background-color:transparent; }
+                .P5 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#1c1c1c; background-color:transparent; }
+                .P6 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#1c1c1c; background-color:transparent; }
+                .P7 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#1c1c1c; background-color:#fff200; }
+                .P8 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#1c1c1c; background-color:transparent; }
+                .P9 { font-size:12pt; font-family:Times new roman; writing-mode:page; color:#00aaad; font-style:normal; background-color:transparent; }
+                .Emphasis { font-style:italic; }
+                .T2 { font-weight:normal; }
+                .T21 { letter-spacing:normal; font-weight:normal; }
+                .T22 { letter-spacing:normal; font-weight:normal; }
+                .T23 { letter-spacing:normal; font-weight:normal; }
+                .T24 { letter-spacing:normal; font-weight:normal; }
+                .T25 { letter-spacing:normal; font-weight:normal; }
+                .T3 { font-weight:normal; }
+                .T34 { color:#1c1c1c; font-family:Times new roman; font-size:12pt; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; }
+                .T35 { color:#1c1c1c; font-family:Times new roman; font-size:12pt; letter-spacing:normal; font-style:normal; font-weight:normal; background-color:transparent; }
+                .T37 { font-weight:normal; }
+                .T53 { font-size:12pt; }
+                .T54 { font-size:12pt; }
+                .T55 { font-size:12pt; }
+                .T56 { font-size:12pt; }
+                .T57 { font-size:12pt; }
+                .T58 { font-size:12pt; font-weight:normal; }
+                .T59 { font-size:12pt; font-weight:normal; background-color:#ed1c24; }
+                .T60 { font-size:12pt; background-color:#ed1c24; }
+                .T61 { font-size:12pt; }
+                .T69 { color:#1c1c1c; font-family:Times new roman; font-size:12pt; font-style:normal; background-color:transparent; }
+                .T7 { font-weight:normal; background-color:#fff200; }
+                .T70 { color:#1c1c1c; font-family:Times new roman; font-size:12pt; font-style:normal; background-color:transparent; }
+                .T8 { font-weight:normal; background-color:#fff200; }
+                /* ODF styles with no properties representable as CSS */
+                .T1 .T62 .T63 .T64  { }
+                </style></head><body dir="ltr" style="max-width:21.001cm;margin-top:2cm; margin-bottom:2cm; margin-left:2cm; margin-right:2cm; "><p class="P9">This work presents a time dependent metric for object’s confidence  which closely resembles the  behavior inherit by human for detecting an object ,and its inclusion in the pre implemented detection and   tracking algorithm like SORT[],DEEPSORT[].In contrast to other existed tracking algorithm where temporal information is extracted from sequence of frames to enhance tracking this work uses infromation gathered from tracker and generate the the temporal confidence of an object without affecting the fps of existed tracking algorithms.</p><p class="P2"> </p><p class="P2"> </p><p class="P3"><span class="T1">Object  detection and </span>tracking plays an important role in computer vision field, and numerous tracking approaches have been proposed with demonstrated <span class="T1">success.</span><span class="T2">Most of the conventional detection and tracking algorithms for moving objects involves pre-processing, background subtraction (along with dynamic background modelling), detection foreground object(s) (particularly the moving objects), post-processing, and </span><span class="T3">then </span><span class="T2">tracking </span><span class="T8">[</span><span class="T7">Bahadir Karasulu and Serdar Korukoglu,.: Springer, 2013, ch. 2, pp. 7-30.</span><span class="T8">].</span></p><p class="P20_borderStart"><span class="T62">An input image is most often pre-processed for normalizing contrast and brightness effects [4]. On the other hand, a color space transformation (e.g. RGB to LAB color space) may help to get better results while dealing with color images. </span></p><p class="P12"><span class="T62">The </span><span class="T63">preprocessing</span><span class="T62"> step is followed by the Feature Extraction. The input image contains much extra information that is not necessary for classification. Therefore, prior to image classification, the target image is simplified by extracting the important information contained in the image and leaving out the rest.  However, the image can be simplified by running an edge detector on the image. It is still easily possible to discern the circular shape of the buttons in these edge images. Therefore, it can be concluded that edge detection retains the essential information while throwing away non-essential information. However, designing these features is crucial to the performance of the algorithm in a traditional computer vision approaches. </span></p><p class="P18"><span class="T62">A much better performance can be achieved finding much more reliable features than the simple edge detection. In the example of shirt and coat buttons, a good feature detector will not only capture the circular shape of the buttons but also gather information about how buttons are different from other circular objects like car tires. Some well-known features used in computer vision are Haar-like features (introduced by Viola and Jones) [5], Histogram of Oriented Gradients (HOG) [6,7], Scale-Invariant Feature Transform (SIFT) [8,9], Speeded Up Robust Feature (SURF) [10] etc.</span></p><p class="P14">Now, after converting an image to a corresponding feature vector, classification algorithm takes this feature vector as input and outputs a class label. However, these classification algorithms are required to be trained before it can actually determine the classes of the objects. The algorithms need to be trained by showing thousands of examples of images from different target and known classes.</p><p class="P12_borderEnd"><span class="T62">The classification algorithms/classifiers are majorly clustered in - Linear classifier, Quadratic classifier, Bayesian classifier, Neural Network, Kernel estimation and k-nearest neighbor, Decision Trees, Support Vector Machines, Maximum Entropy Classifier etc. Among these algorithms, the mostly cultured classifier is the Neural Network based classifier. After classification, post-processing is used to refine the bounding box, eliminate duplicate detections, and rescore the box based on other objects in the scene. However, these complex pipelines are slow and hard to optimize because each individual component must be trained separately. To resolve this limitation, some new algorithms like YOLO [11] has been proposed which trains the classifier to find multiple objects in a single frame in one go. The algorithm has proved its potentiality in terms of speed and accuracy.</span></p><p class="P3"><span class="T37"> </span><span class="T62">Nevertheless, in spite of these long sustained researches in this field, there still exists a missing single temporal based  metric which can estimate the confidence of the tracked object. </span></p><p class="P4"/><p class="P4"> </p><p class="P4"> </p><p class="P12"><span class="T62">As per the best knowledge of authors </span><span class="T64">existed</span><span class="T62"> tracking algorithm uses the temporal information to  enhance the tracking process and  not the confidence parameter .</span></p><p class="P1"><span class="T69">Currently The tracking process is achieved by using a combination of spatial and temporal information about the moving object. </span><span class="T70">Most of the time </span><span class="T34">A motion model </span><span class="T35">is </span><span class="T34"> used  </span><span class="T35">along with other tricks </span><span class="T34">that captures the dynamic behavior of an object. I</span><span class="Emphasis"><span class="T34">t predicts the potential position of objects in the future frames, hence, reducing the search space. </span></span><span class="T34">YOLO with kalman Filter has been a popular choice . </span><span class="Emphasis"><span class="T34">However, the motion model alone can fail in scenarios where motion is caused by things that are not in a video or abrupt direction and speed change.</span></span></p><p class="P10"> <span> Multiple object tracking is more challenging than single object tracking where a algorithm needs to distinguish between  object of same class and also  needs to track all object in a scene. SORT[single online real time tracking ] algorithm uses the motion model of an object with other tricks such as IOU , Hungarian matching algorithm .</span></p><p class="P10_borderEnd"/><p class="P8"><span class="T55">The discussed object detection and tracking  algorithms </span><span class="T56">and other existed  algorithms  </span><span class="T57">often</span><span class="T56"> </span><span class="T55">uses motion model which is a kind of temporal based method to enhance the tracking but fails to incorporate this with the confidence parameter. </span><span class="T53">This is because; the current algorithms simply implement a passive object detection running on the live camera images [12] and predict the confidence of the detected object based on a single frame  only .Contrary to this Humans has the tendency to strongly correlate its current  knowledge of the object at time t with the  knowledge gathered from previous time steps to increase or decrease its confidence about the  identified object. </span></p><p class="P8"><span class="T53">        Therefore;we can make more informed decision about the  detected object  by inclusion of  two analogous property inherited by the humans in existing object tracking algorithms.</span></p><p class="P15_borderStart"/><p class="P16_borderEnd"><span class="T60">First </span><span class="T53">is</span><span class="T58"> time dependent iconic memory of a Human . </span><span class="T55">A approach towards the formulating the time dependency of iconic memory of human  has been done in a paper:</span></p><p class="P7">Graziano M, Sigman M (2008) The dynamics of sensory buffers: Geometric, spatial, and experience-dependent shaping of iconic memory. Journal of Vision 8: 9,1–13.</p><p class="P5">In this paper they have conducted an experiment where observers had to identify the position of  specific subset of the characters at an interval (Inter Stimulus Interval, ISI)</p><p class="P5">This paper has reported the time dependent confidence of the iconic memory as :</p><!--Next 'div' was a 'text:p'.--><div class="P8"><!--Next '
+                        span' is a draw:frame.
+                    --><span id="a_1"> <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                   <mrow>
+                     <mi>p</mi>
+                     <mrow>
+                      <mi>'</mi>
+                      <mo stretchy="false">=</mo>
+                      <mi>a</mi>
+                     </mrow>
+                     <mi>∗</mi>
+                     <mi>e</mi>
+                     <mi>∧</mi>
+                     <mrow>
+                      <mrow>
+                       <mo fence="true" stretchy="true">(</mo>
+                       <mrow>
+                        <mrow>
+                         <mrow>
+                          <mi>−</mi>
+                          <mi>t</mi>
+                         </mrow>
+                         <mo stretchy="false">/</mo>
+                         <mi>τ</mi>
+                        </mrow>
+                       </mrow>
+                       <mo fence="true" stretchy="true">)</mo>
+                      </mrow>
+                      <mo stretchy="false">+</mo>
+                      <mi>b</mi>
+                     </mrow>
+                    </mrow>
+                  </math> </span><!--Next 'div' added for floating.--><div style="position:relative; left:0cm;"><span class="T61"> ---------------------(1)</span></div></div><div style="clear:both; line-height:0; width:0; height:0; margin:0; padding:0;"> </div><p class="P6">p’=probability confidence of identifing the spatial position  of the letter</p><p class="P6">a,b, tou= free parameters</p><p class="P19">t=ISI time</p><p class="P6">tau : C (the time constant) indicates the temporal constant which characterizes the exponential decay in performance, i.e., the duration of iconic memory.}</p><!--Next 'div' was a 'text:p'.--><div class="P16"><span class="T53">This formula can be interperated as follows , to identify the position of the letter after shorter dutration of time a human can use both its iconic memory(</span><!--Next '
+                        span' is a draw:frame.
+                    --><span id="Object1"> <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                   <mrow>
+                     <mi>a</mi>
+                     <mi>∗</mi>
+                     <mi>e</mi>
+                     <mi>∧</mi>
+                     <mrow>
+                      <mo fence="true" stretchy="true">(</mo>
+                      <mrow>
+                       <mrow>
+                        <mrow>
+                         <mi>−</mi>
+                         <mi>t</mi>
+                        </mrow>
+                        <mo stretchy="false">/</mo>
+                        <mi>τ</mi>
+                       </mrow>
+                      </mrow>
+                      <mo fence="true" stretchy="true">)</mo>
+                     </mrow>
+                    </mrow>
+                  </math> </span><!--Next 'div' added for floating.--><div style="position:relative; left:0cm;"><span class="T53">term) as well as long term memory(constant memory) but after some time (2*tau, or 3*tau) the probability confidence of iconic memory decreases in very large extent and now human can only depend on  its long term memory to identify the position.</span></div></div><div style="clear:both; line-height:0; width:0; height:0; margin:0; padding:0;"> </div><p class="P8"><span class="T61">This formula shows the exponential  time dependency of the confidence level in identifying the positon of the characters and can be extended further in evaluating the time dependent confidence of detecting the object in computer vision, Our proposed algorithm has also the  exponental dependency on the time dependent factors.</span></p><p class="P6"> </p><p class="P16_borderStart"><span class="T59">Second </span><span class="T58">, Humans lingers its gaze in an object until it is detected properly [13].</span><span class="T53">The gaze tries to obtain a temporal continuity between the consecutive </span><span class="T54">time </span><span class="T53">frames while the object is in motion. Otherwise, the continuity is obtained by moving our gaze around the object to collect more features about it. Temporal continuity while detection help humans to correlate its previous knowledge about the object and thus combine it with new received information and increase its confidence of detection  of a object correctly. </span></p><p class="P11"><span> </span></p><p class="P11">This work thus gathers inspiration from the above mentioned behavior which occurs naturally across humans, birds and most animals. Some strategies have also been proposed in the same direction [14], but they yet required to be improved further for real-time implementation. </p><p class="P13"><span class="T21">        </span></p><p class="P17_borderEnd"><span class="T21">In this wo</span><span class="T22">r</span><span class="T21">k </span><span class="T24">to </span><span class="T21"> Incorporate </span><span class="T23">above two discussed temporal behavior (lingering affect and  exponential time dependency ) to make informed decision about the detected object confidence  we use algorithm which incorporate the time dependency and for  </span><span class="T22">lingering affect </span><span class="T24"> </span><span class="T22">we </span><span class="T23">use information  </span><span class="T25">obtained from tracker implemented in SORT and then  use all the previous </span><span class="T22"> sequence of frames </span><span class="T23">to derive object’</span><span class="T25">s</span><span class="T23"> confidence.</span><span class="T22">  </span></p></body></html>
         
         </div>
         
-
+        <br>
+        <br>
+        <br>
         <div class="container">
             <p class="noindent" >In this work, object detection has been implemented using the well-known
                 You-Only-Look-Once (YOLO) algorithm. Like most other deep-neural-network based
